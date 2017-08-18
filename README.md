@@ -1,6 +1,6 @@
 # Pokémon Division (WIP-Work In Progress)
 
-Pokémon Division is an online MMORPG based on the famous Pokémon gameboy games.
+Pokémon Division is an online MMORPG that is aimed to run all devices based on the famous Pokémon gameboy games.
 
 For a live demo visit [Pokémon Division](https://pokemondivision.000webhostapp.com/)
 
