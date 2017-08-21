@@ -1,4 +1,4 @@
-# Pokémon Division (WIP-Work In Progress)
+# Pokémon Division
 
 ![Pokémon logo](/images/pokemonlogohd.png "Pokémon logo")
 
