@@ -1,5 +1,7 @@
 # Pokémon Division (WIP-Work In Progress)
 
+![alt text](https://github.com/divakarmanivel/pokemondivision/images/pokemonlogohd.png "Pokémon logo")
+
 Pokémon Division is an online MMORPG that is aimed to run all devices based on the famous Pokémon gameboy games.
 This game is a work in progress with lots of improvements to be done.
 
