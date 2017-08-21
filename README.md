@@ -2,7 +2,7 @@
 
 ![Pokémon logo](/images/pokemonlogohd.png "Pokémon logo")
 
-Pokémon Division is an online MMORPG that is aimed to run all devices based on the famous Pokémon gameboy games.
+Pokémon Division is an online MMORPG based on the famous Pokémon gameboy games. It is designed to run on all devices.
 This game is a work in progress with lots of improvements to be done.
 
 Currently I am working on:
