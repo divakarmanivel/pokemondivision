@@ -43,6 +43,10 @@ Q: Where did you get the Pokémon data for the Pokédex?
 
 A: Most of the data I had been collecting since my childhood. But some of the more advanced data I referred to [Veekun database](https://veekun.com/) and [PokémondDb](https://pokemondb.net/).
 
+Q: Where did you get the Pokémon art?
+
+A: The art used in this development version was obtained from [The Spriters Resource](https://www.spriters-resource.com/) and [OpenGameArt](https://opengameart.org/). I am planning to bring in my own sprites in the near future when I have more time.
+
 # License
 
 Pokémon, Gotta Catch'em All, and Game Boy are all trademarks of Nintendo.
