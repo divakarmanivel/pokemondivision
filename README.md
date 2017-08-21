@@ -1,5 +1,4 @@
 # Pokémon Division (WIP-Work In Progress)
----
 
 Pokémon Division is an online MMORPG that is aimed to run all devices based on the famous Pokémon gameboy games.
 This game is a work in progress with lots of improvements to be done.
@@ -13,7 +12,6 @@ Currently I am working on:
 * Add a Pokédex with updated Pokémon data.
 
 ## Controls in Game
----
 
 When playing on a desktop use w,a,s,d to move the character.
 
@@ -21,13 +19,11 @@ When playing in a touch enabled device touch and drag on the screen to move the 
 
 For a live demo visit [Pokémon Division](https://pokemondivision.000webhostapp.com/)
 
-#Contributing
----
+## Contributing
 
 I welcome pull requests from all Pokémon fans and seasoned JavaScript developers alike! Thanks in advance!
 
 # FAQ
----
 
 Q: Why Html and JavaScript when there are a ton of other languages to choose from?
 A: Ease of use and portability. My aim was to bring Pokémon Division to every device alike and keeping that in mind I chose a language that would suit me as well.
@@ -42,7 +38,7 @@ Q: Where did you get the Pokémon data for the Pokédex?
 A: Most of the data I had been collecting since my childhood. But some of the more advanced data I referred to [Veekun database](https://veekun.com/) and [PokémondDb](https://pokemondb.net/).
 
 # License
----
+
 Pokémon, Gotta Catch'em All, and Game Boy are all trademarks of Nintendo.
 This game is not affiliated with Nintendo, Creatures, or GameFreak. 
 
