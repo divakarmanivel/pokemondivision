@@ -1,1 +1,0 @@
-=VLOOKUP(F5,$G$5:$H$683,2,FALSE)
