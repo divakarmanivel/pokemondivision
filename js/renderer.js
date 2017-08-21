@@ -1,11 +1,4 @@
 function renderer(){
-	/*
-	var characterRow=1;
-	var frameIndex=0;
-	var tickCount=0;
-	var ticksPerFrame=0;
-	var numberOfFrames=3;
-	*/
 
 	var characterRow=2;
 	var frameIndex=0;
@@ -14,6 +7,7 @@ function renderer(){
 	var numberOfFrames=9;
 	// render the level
 	function renderLevel(){
+	if(!loading){
 		var startCol = Math.floor(camX/tileSize); 
 		var endCol = startCol + Math.floor(camWidth/tileSize); 
 		var startRow = Math.floor(camY/tileSize); 
@@ -32,8 +26,6 @@ function renderer(){
 				if(x>=0&&y>=0&&x<=camHeight&&y<=camWidth&&i>=0&&i>=0&&j>=0&&i<levelRows&&j<levelCols){
 					var tile = level[i][j];
 					if(tile==0&&tile!=null){
-						var sourceX=(tile-1)*tileSize;
-						var sourceY=0;
 						context.drawImage(
 							grassTiles,
 							0,
@@ -45,8 +37,6 @@ function renderer(){
 							tileSize,
 							tileSize);
 					} else if(tile==1&&tile!=null){
-						var sourceX=(tile-1)*tileSize;
-						var sourceY=0;
 						context.drawImage(
 							waterTiles,
 							0,
@@ -57,18 +47,45 @@ function renderer(){
 							x,
 							tileSize,
 							tileSize);
-					}
+					}  else if(tile==2&&tile!=null){
+            var pokemon = pokemonDatabase[66].sprites[2];
+						context.drawImage(
+							grassTiles,
+							0,
+							160,
+							tileSize,
+							tileSize,
+							y,
+							x,
+							tileSize,
+							tileSize);
+						context.drawImage(
+							pokemon,
+							0,
+							0,
+							tileSize,
+							tileSize,
+							y,
+							x,
+							tileSize,
+							tileSize);
+					} 
+				} else {
+					context.drawImage(
+							waterTiles,
+							0,
+							160,
+							tileSize,
+							tileSize,
+							y,
+							x,
+							tileSize,
+							tileSize);
 				}
 			}
 		}
 		
-		// render player
-		/*
-		var sw=(frameIndex*tileSize)+frameIndex+1;
-		var sh=(characterRow*tileSize)+characterRow+1;
-		var w = Math.round(camWidth/(2*tileSize))*tileSize;
-		var h = Math.round(camHeight/(2*tileSize))*tileSize;
-		*/
+		// draw player
 		context.drawImage(
 			charTiles,
 			frameIndex*64,
@@ -80,8 +97,9 @@ function renderer(){
 			tileSize,
 			tileSize);
 	}
+}	
 	
-	// function to handle the game itself
+// update the game variables with this function
 
 	function updateGame() {
 		// update any movements
@@ -113,13 +131,8 @@ function renderer(){
 		}
 		// update the game
 		window.requestAnimationFrame(updateGame);
-		
 		// rendering level
 		renderLevel();
-		
 	}
- 
 	updateGame();
-
-};
-    
+}
