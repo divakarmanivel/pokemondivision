@@ -37,7 +37,7 @@ A: Simple, just to keep the depencies low and the game more lighter. I didnt wan
 
 Q: Can anybody contribute to Pokémon Division?
 
-A: Yes! I made this open source because I wanted everybody to contribute. Any Pokémon fans out there? Y'all are welcome here to collaborate and showcase your knowledge in Pokémon. There are lot of ways you can contribute, contribute by helping me with the code or contribute with the Pokémon database. Or you can simply leave a star to this Git repo. I will be gratefull for any and all help that I get.
+A: Yes! I made this open source because I wanted everybody to contribute. Any Pokémon fans out there? Y'all are welcome here to collaborate and showcase your knowledge in Pokémon. There are lot of ways you can contribute, contribute by helping me with the code or contribute with the Pokémon database. Or you can simply leave a star to this Git repo. I will be grateful for any and all help that I get.
 
 Q: Where did you get the Pokémon data for the Pokédex?
 
