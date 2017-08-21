@@ -17,7 +17,7 @@ Currently I am working on:
 
 When playing on a desktop use w,a,s,d to move the character.
 
-When playing in a touch enabled device touch and drag on the screen to move the character in the desired direction.
+When playing on a touch enabled device touch and drag on the screen to move the character in the desired direction.
 
 For a live demo visit [Pokémon Division](https://pokemondivision.000webhostapp.com/)
 
