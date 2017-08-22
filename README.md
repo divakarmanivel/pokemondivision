@@ -52,4 +52,4 @@ A: The art used in this development version was obtained from [The Spriters Reso
 Pokémon, Gotta Catch'em All, and Game Boy are all trademarks of Nintendo.
 This game is not affiliated with Nintendo, Creatures, or GameFreak. 
 
-Created and Maintained by Divakar Manivel.
+Created and Maintained by Divakar Manivel. Licensed under GNU General Public License v3.0.
