@@ -1,38 +1,50 @@
-var loading = true;
-
-var canvas = document.getElementById("canvas"); // the canvas where game will be drawn
-var context = canvas.getContext("2d"); // canvas context
-var touchcanvas = document.getElementById("touchcanvas"); // the touch canvas where joystick will be drawn
-var touchcontext = touchcanvas.getContext("2d"); // touch canvas context
-
 ///////////////////
-/* Level Setup */
+/* Global Setup */
 /////////////////
 
-var level = initMap(200,200);
+var loading = true;
 
+// global variables to calculate movement
+var difX=0;
+var difY=0;
+var sX=0;
+var sY=0;
+var movement = false;
+
+//////////////////
+/* Level Setup */
+////////////////
+
+var level = initMap(100,100);
 var levelCols=level[1].length; // level width, in tiles
 var levelRows=level.length; // level height, in tiles
 var tileSize=32; // tile size, in pixels
 
-setMap(level, 2, 2, 2);
+setMap(level, 2, 2, 2, true);
 
 ///////////////////
 /* Canvas Setup */
 /////////////////
 
-var screenWidth=window.innerWidth||screen.width;
-var screenHeight=window.innerHeight||screen.height;
+var bgcanvas = document.getElementById("bgcanvas"); // the bgcanvas where game will be drawn
+var bgcontext = bgcanvas.getContext("2d"); // bgcanvas context
+var canvas = document.getElementById("canvas"); // the canvas where game will be drawn
+var context = canvas.getContext("2d"); // canvas context
+var touchcanvas = document.getElementById("touchcanvas"); // the touch canvas where joystick will be drawn
+var touchcontext = touchcanvas.getContext("2d"); // touch canvas context
+
+var screenWidth=window.innerWidth||screen.width; // screen width
+var screenHeight=window.innerHeight||screen.height; // screen height
 canvas.width=tileSize*levelCols; // canvas width
 canvas.height=tileSize*levelRows; // canvas height
+bgcanvas.width=screenWidth; // bgcanvas width
+bgcanvas.height=screenHeight; // bgcanvas height
 touchcanvas.width=screenWidth; // touchcanvas width
 touchcanvas.height=screenHeight; // touchcanvas height
 
-// variables to calculate movement
-var difX=0;
-var difY=0;
-var sX=0;
-var sY=0;
+disableScrolling("bgcanvas");
+disableScrolling("canvas");
+disableScrolling("touchcanvas");
 
 ///////////////////
 /* Camera Setup */
@@ -44,7 +56,7 @@ var camWidth=Math.round(screenWidth/tileSize)*tileSize; // camera width
 var camHeight=Math.round(screenHeight/tileSize)*tileSize; // camera height
 
 ///////////////////
-/* Player Setup */
+/* Player setup */
 /////////////////
 
 var playerCol=Math.round(camWidth/(2*tileSize)); // player starting column
@@ -56,12 +68,10 @@ if(canvas.height<screenHeight){playerRow=Math.round(levelRows/2);}
 var playerYPos=playerRow*tileSize; // player Y position in pixels
 var playerXPos=playerCol*tileSize; // player X position in pixels
 
-///////////////////
+//////////////////
 /* Load images */
-/////////////////
+////////////////
 
-//Loader.loadImage('tiles','../img/map1.png');
-//var mapTiles=Loader.getImage('tiles');
 var grassTiles = new Image();
 grassTiles.src="images/grass.png";
 
@@ -71,9 +81,10 @@ waterTiles.src="images/water.png";
 var charTiles = new Image();
 charTiles.src="images/male_walkcycle.png";
 
-/////////////////////////////////////////
-/* Pokemon database setup begins here */
-///////////////////////////////////////
+/////////////////////////////
+/* Pokemon database setup */
+///////////////////////////
+
 var pokemon_data; // This will hold all the pokemon data in json format
 
 function loadJSON(file,callback){
@@ -96,7 +107,9 @@ loadJSON("pokemon_db/pokemon_json.json", function(response){
 var pokemonDatabase=[]; // Collection of all Pokemon data stores as database
 function loadPokemonDatabase(){
 	var pokemonData=[]; // Individual Pokemon data
-	var pokemonTiles=[]; // Individual Pokemon sprite collection
+	var pokemonTiles=[]; // Individual Pokemon sprite 
+
+collection
 
 	var pokeCanvas = document.createElement('canvas');
 	var pokeContext = pokeCanvas.getContext('2d');
@@ -140,16 +153,28 @@ loading = false;
 pokemonTileSet.src = 'images/pokemon_overworld.png';
 }
 
+///////////////////////
+/* Helper functions */
+/////////////////////
+
 function cloneCanvas(oldCanvas) {
     //create a new canvas
     var newCanvas = document.createElement('canvas');
-    var newContext = newCanvas.getContext('2d');
+    var context = newCanvas.getContext('2d');
     //set dimensions
     newCanvas.width = oldCanvas.width;
     newCanvas.height = oldCanvas.height;
-    newContext.clearRect(0,0,newCanvas.width,newCanvas.height);
     //apply the old canvas to the new one
-    newContext.drawImage(oldCanvas, 0, 0);
+    context.drawImage(oldCanvas, 0, 0);
     //return the new canvas
     return newCanvas;
+}
+
+function disableScrolling(scrollCanvas){
+	document.getElementById(scrollCanvas).onwheel = function(event){
+    event.preventDefault();
+  };
+  document.getElementById(scrollCanvas).onmousewheel = function(event){
+    event.preventDefault();
+  };
 }
