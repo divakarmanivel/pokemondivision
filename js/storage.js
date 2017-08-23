@@ -1,11 +1,11 @@
-setItem(key, value){
+function setItem(key, value){
 window.localStorage.setItem(key, value);
 }
 
-getItem(key){
+function getItem(key){
 return window.localStorage.getItem(key);
 }
 
-clearDb(){
+function clearDb(){
 window.localStorage.clear();
 }
