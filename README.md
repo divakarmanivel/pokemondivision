@@ -19,7 +19,7 @@ When playing on a desktop use w,a,s,d to move the character.
 
 When playing on a touch enabled device touch and drag on the screen to move the character in the desired direction.
 
-For a live demo visit [Pokémon Division](https://pokemondivision.000webhostapp.com/) on desktop or mobile.
+For a live demo visit [Pokémon Division](https://divakarmanivel.github.io/pokemondivision/) on desktop or mobile.
 
 ## Contributing
 
