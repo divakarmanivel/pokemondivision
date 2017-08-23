@@ -1,18 +1,48 @@
 function renderer(){
-
+	
 	var characterRow=2;
 	var frameIndex=0;
 	var tickCount=0;
 	var ticksPerFrame=0;
 	var numberOfFrames=9;
+	var bgRendered = false;
+
+	function renderBackground(){
+	if(!loading){
+		bgRendered = true;
+		bgcontext.clearRect(0, 0, bgcanvas.width, bgcanvas.height);
+		var w = Math.floor(camWidth/tileSize);
+		var h = Math.floor(camHeight/tileSize);
+		if(levelCols<w){w=levelCols-1;}
+		if(levelRows<h){h=levelRows-1;}
+		for(var i=0;i<=h;i++){
+			for(var j=0;j<=w;j++){
+					bgcontext.drawImage(
+						grassTiles,
+						0,
+						160,
+						tileSize,
+						tileSize,
+						j*tileSize,
+						i*tileSize,
+						tileSize,
+						tileSize);
+				}
+			}
+		}
+	}
+	
 	// render the level
 	function renderLevel(){
 	if(!loading){
+	if(!bgRendered){
+		renderBackground(); 
+	}
 		var startCol = Math.floor(camX/tileSize); 
 		var endCol = startCol + Math.floor(camWidth/tileSize); 
 		var startRow = Math.floor(camY/tileSize); 
 		var endRow = startRow + Math.floor(camHeight/tileSize);
-		
+
 		var offsetX = -camX + startCol * tileSize; 
 		var offsetY = -camY + startRow * tileSize;
 		// clear the canvas
@@ -23,91 +53,49 @@ function renderer(){
 			for(j=startCol;j<=endCol;j++){
 				var x = (i-startRow)*tileSize-offsetX;
 				var y = (j-startCol)*tileSize-offsetY;
-				if(x>=0&&y>=0&&x<=camHeight&&y<=camWidth&&i>=0&&i>=0&&j>=0&&i<levelRows&&j<levelCols){
+				if(i>=0&&j>=0&&i<levelRows&&j<levelCols){
 					var tile = level[i][j];
-					if(tile==0&&tile!=null){
-						context.drawImage(
-							grassTiles,
-							0,
-							160,
-							tileSize,
-							tileSize,
-							y,
-							x,
-							tileSize,
-							tileSize);
-					} else if(tile==1&&tile!=null){
-						context.drawImage(
-							waterTiles,
-							0,
-							160,
-							tileSize,
-							tileSize,
-							y,
-							x,
-							tileSize,
-							tileSize);
+					if(tile==1&&tile!=null){
+						drawTile(waterTiles,0,160,tileSize,tileSize,y,x);
 					}  else if(tile==2&&tile!=null){
-            var pokemon = pokemonDatabase[66].sprites[2];
-						context.drawImage(
-							grassTiles,
-							0,
-							160,
-							tileSize,
-							tileSize,
-							y,
-							x,
-							tileSize,
-							tileSize);
-						context.drawImage(
-							pokemon,
-							0,
-							0,
-							tileSize,
-							tileSize,
-							y,
-							x,
-							tileSize,
-							tileSize);
-					} 
+            var pokemon = pokemonDatabase[1].sprites[2];
+						drawTile(sprite,0,0,tileSize,tileSize,y,x);
+					}
 				} else {
-					context.drawImage(
-							waterTiles,
-							0,
-							160,
-							tileSize,
-							tileSize,
-							y,
-							x,
-							tileSize,
-							tileSize);
+					drawTile(waterTiles,0,160,tileSize,tileSize,y,x);
 				}
 			}
 		}
-		
 		// draw player
+		drawTile(charTiles,frameIndex*64,characterRow*64,64,64,playerCol*tileSize,playerRow*tileSize);
+	}	
+	}
+
+	function drawTile(tile, sourceX, sourceY, sWidth, 
+
+sHeight, destinationX, destinationY){
 		context.drawImage(
-			charTiles,
-			frameIndex*64,
-			characterRow*64,
-			64, //sourcetilesize
-			64, //sourcetilesize
-			playerCol*tileSize,
-			playerRow*tileSize,
+			tile,
+			sourceX,
+			sourceY,
+			sWidth,
+			sHeight,
+			destinationX,
+			destinationY,
 			tileSize,
 			tileSize);
 	}
-}	
 	
 // update the game variables with this function
-
 	function updateGame() {
 		// update any movements
 		if(sX!=0||sY!=0){
 			if(sX>0){characterRow=3;}
 			else if(sX<0){characterRow=1;}
 			else if(sY<0){characterRow=0;}
-			else if(sY>0){characterRow=2;}
+			else if(sY>0){characterRow=2;} 
+			else {characterRow=2; frameIndex=0;}
+			
 			tickCount+=1;
 			if(tickCount>ticksPerFrame){
 				tickCount=0;
@@ -117,16 +105,35 @@ function renderer(){
 					frameIndex=0;
 				}
 			}
-			var collision=collisionCheck();
+			var collision=collisionCheck(Math.round(playerXPos/tileSize), Math.round(playerYPos/tileSize));
 			if(!collision){
-			var difX=sX*tileSize;
-			var difY=sY*tileSize;
-			camX+=difX;
-			camY+=difY;
-			playerXPos+=difX;
-			playerYPos+=difY;
+			difX=difX+sX;
+			difY=difY+sY;
 			sX=0;
 			sY=0;
+			var steps=6;
+			if(difX>=steps){
+				movement=true;
+				camX+=tileSize;
+				playerXPos+=tileSize;
+				difX-=steps;
+			} else if(difX<=-steps){
+				movement=true;
+				camX-=tileSize;
+				playerXPos-=tileSize;
+				difX+=steps;
+			}
+			if(difY>=steps){
+				movement=true;
+				camY+=tileSize;
+				playerYPos+=tileSize;
+				difY-=steps;
+			} else if(difY<=-steps){
+				movement=true;
+				camY-=tileSize;
+				playerYPos-=tileSize;
+				difY+=steps;
+			}
 			}
 		}
 		// update the game
