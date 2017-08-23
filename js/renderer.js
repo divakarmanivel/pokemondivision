@@ -58,8 +58,8 @@ function renderer(){
 					if(tile==1&&tile!=null){
 						drawTile(waterTiles,0,160,tileSize,tileSize,y,x);
 					}  else if(tile==2&&tile!=null){
-            var pokemon = pokemonDatabase[1].sprites[2];
-						drawTile(sprite,0,0,tileSize,tileSize,y,x);
+            					var pokemon = pokemonDatabase[1].sprites[2];
+						drawTile(pokemon,0,0,tileSize,tileSize,y,x);
 					}
 				} else {
 					drawTile(waterTiles,0,160,tileSize,tileSize,y,x);
