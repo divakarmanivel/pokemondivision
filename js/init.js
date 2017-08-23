@@ -107,19 +107,17 @@ loadJSON("pokemon_db/pokemon_json.json", function(response){
 var pokemonDatabase=[]; // Collection of all Pokemon data stores as database
 function loadPokemonDatabase(){
 	var pokemonData=[]; // Individual Pokemon data
-	var pokemonTiles=[]; // Individual Pokemon sprite 
-
-collection
+	var pokemonTiles=[]; // Individual Pokemon sprite collection
 
 	var pokeCanvas = document.createElement('canvas');
 	var pokeContext = pokeCanvas.getContext('2d');
-  pokeCanvas.height=tileSize;
-  pokeCanvas.width=tileSize;
+  	pokeCanvas.height=tileSize;
+  	pokeCanvas.width=tileSize;
 	var pokemonTileSet = new Image();
 	pokemonTileSet.onload=function(){
 	for (var i = 1; i < pokemon_data.length; i++){
 		pokemonData=[]; // Reset as we are obtaining data for a new Pokemon
-    pokemonTiles=[];
+    		pokemonTiles=[];
 		var pokemon=pokemon_data[i];
 		pokemonData.generation=parseInt(pokemon.A);
 		pokemonData.id=parseInt(pokemon.B);
@@ -127,7 +125,7 @@ collection
 		pokemonData.primaryType=pokemon.D;
 		pokemonData.secondaryType=pokemon.E;
 		pokemonData.evolutionLevel=parseInt(pokemon.F);
-    for (var j = 0; j < 3; j++){
+    		for (var j = 0; j < 3; j++){
 		for (var k = 0; k < 2; k++){
 			var xPos = parseInt(pokemon.H);
 			var yPos = parseInt(pokemon.I);
@@ -142,8 +140,8 @@ collection
 				0,
 				tileSize,
 				tileSize);
-		  pokemonTiles.push(cloneCanvas(pokeCanvas));
-      pokeContext.clearRect(0,0,pokeCanvas.width,pokeCanvas.height);
+		  	pokemonTiles.push(cloneCanvas(pokeCanvas));
+      			pokeContext.clearRect(0,0,pokeCanvas.width,pokeCanvas.height);
   	}}
 		pokemonData.sprites=pokemonTiles;
 		pokemonDatabase[i]=pokemonData;
