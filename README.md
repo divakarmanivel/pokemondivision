@@ -23,7 +23,11 @@ For a live demo visit [Pokémon Division](https://divakarmanivel.github.io/pokem
 
 ## Contributing
 
-I welcome pull requests from all Pokémon fans and seasoned JavaScript developers alike! Thanks in advance!
+I welcome pull requests from all Pokémon fans and seasoned JavaScript developers alike! Thanks in advance! For more details on how to contribute, visit our [Contribution](CONTRIBUTING.md) page.
+
+## Code of Conduct
+
+Visit our [Code of Conduct](CODE_OF_CONDUCT.md) page for an overview on our ground rules.
 
 # FAQ
 
@@ -52,4 +56,4 @@ A: The art used in this development version was obtained from [The Spriters Reso
 Pokémon, Gotta Catch'em All, and Game Boy are all trademarks of Nintendo.
 This game is not affiliated with Nintendo, Creatures, or GameFreak. 
 
-Created and Maintained by Divakar Manivel. Licensed under GNU General Public License v3.0.
+Created and Maintained by Divakar Manivel. Licensed under [GNU General Public License v3.0](LICENSE).
