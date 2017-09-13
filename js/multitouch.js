@@ -103,7 +103,6 @@ updateTouch();
 
 // keyboard listeners
 document.addEventListener("keydown", function(e){
-console.log(e.keyCode);
 	switch(e.keyCode){
 		case 65:
 			console.log("left");
