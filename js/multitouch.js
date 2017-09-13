@@ -106,15 +106,19 @@ document.addEventListener("keydown", function(e){
 console.log(e.keyCode);
 	switch(e.keyCode){
 		case 65:
+			console.log("left");
 				sX=-1;
 				break;
 		case 87:
+			console.log("up");
 				sY=-1;
 				break;
 		case 68:
+			console.log("right");
 				sX=1;
 				break;
 		case 83:
+			console.log("down");
 				sY=1;
 				break;
 	}
