@@ -1,11 +1,17 @@
-function setItem(key, value){
-window.localStorage.setItem(key, value);
-}
+var storage = {
+    setItem: function (key, value) {
+        window.localStorage.setItem(key, value);
+    },
 
-function getItem(key){
-return window.localStorage.getItem(key);
-}
+    getItem: function (key) {
+        return window.localStorage.getItem(key);
+    },
 
-function clearDb(){
-window.localStorage.clear();
-}
+    clearDb: function () {
+        window.localStorage.clear();
+    },
+
+    count: function () {
+        return window.localStorage.length;
+    }
+};
