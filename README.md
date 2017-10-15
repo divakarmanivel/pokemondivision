@@ -23,7 +23,7 @@ For a live demo visit [Pokémon Division](https://divakarmanivel.github.io/pokem
 
 ## Contributing
 
-I welcome pull requests from all Pokémon fans and seasoned JavaScript developers alike! Thanks in advance! For more details on how to contribute, visit our [Contribution](CONTRIBUTING.md) page.
+I welcome pull requests from all Pokémon fans and seasoned JavaScript developers alike! Thanks in advance! For more details on how to contribute, visit our [Contribution](CONTRIBUTING.md) page and [Pull Request Template](PULL_REQUEST_TEMPLATE.md) page.
 
 ## Code of Conduct
 
