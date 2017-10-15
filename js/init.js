@@ -78,14 +78,11 @@ var playerXPos = playerCol * tileSize; // player X position in pixels
 /* Load images */
 ////////////////
 
-var grassTiles = new Image();
-grassTiles.src = "images/grass.png";
-
-var waterTiles = new Image();
-waterTiles.src = "images/water.png";
+var outdoorTiles = new Image();
+outdoorTiles.src = "images/outdoor.png";
 
 var charTiles = new Image();
-charTiles.src = "images/male_walkcycle.png";
+charTiles.src = "images/hero_overworld.png";
 
 /////////////////////////////
 /* Pokemon database setup */

@@ -30,11 +30,11 @@ If you are a pixel artist and would like to contribute please follow the below g
 * If a character or object is bigger that this it should be a multiple of 32x32 ie 64x64 etc.
 * If the submission is a character, use this template image to design your character. 
 
-![Character walk cycle](/images/male_walkcycle.png "Character walk cycle")
+![Hero walk cycle](/images/hero_sample.png "Hero walk cycle")
 
 * If the submission is a pokémon, use this template image to design your character. 
 
-![Pokémon](/images/bulbasaur.png "Pokémon")
+![Pokémon](/images/pokemon_sample.png "Pokémon")
 
 ## Ground Rules & Responsibilities
 

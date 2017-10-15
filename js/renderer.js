@@ -3,8 +3,8 @@ function renderer() {
 	var characterRow = 2;
 	var frameIndex = 0;
 	var tickCount = 0;
-	var ticksPerFrame = 0;
-	var numberOfFrames = 9;
+	var ticksPerFrame = 2;
+	var numberOfFrames = 3;
 	var bgRendered = false;
 
 	function renderBackground() {
@@ -22,11 +22,11 @@ function renderer() {
 			for (var i = 0; i <= h; i++) {
 				for (var j = 0; j <= w; j++) {
 					bgcontext.drawImage(
-						grassTiles,
-						0,
-						160,
-						tileSize,
-						tileSize,
+						outdoorTiles,
+						103,
+						1,
+						16,
+						16,
 						j * tileSize,
 						i * tileSize,
 						tileSize,
@@ -60,18 +60,18 @@ function renderer() {
 					if (i >= 0 && j >= 0 && i < mapRows && j < mapCols) {
 						var tile = map[i][j];
 						if (tile == 1 && tile != null) {
-							drawTile(waterTiles, 0, 160, tileSize, tileSize, y, x);
+							drawTile(outdoorTiles, 120, 1, 16, 16, y, x);
 						} else if (tile == 2 && tile != null) {
 							var pokemon = pokemonDatabase[1].sprites[2];
 							drawTile(pokemon, 0, 0, tileSize, tileSize, y, x);
 						}
 					} else {
-						drawTile(waterTiles, 0, 160, tileSize, tileSize, y, x);
+						drawTile(outdoorTiles, 1, 1, 16, 16, y, x);
 					}
 				}
 			}
 			// draw player
-			drawTile(charTiles, frameIndex * 64, characterRow * 64, 64, 64, playerCol * tileSize, playerRow * tileSize);
+			drawTile(charTiles, frameIndex * 32, characterRow * 32, 32, 32, playerCol * tileSize, playerRow * tileSize);
 		}
 	}
 
@@ -97,13 +97,13 @@ function renderer() {
 			if (sX > 0) {
 				characterRow = 3;
 			} else if (sX < 0) {
-				characterRow = 1;
+				characterRow = 2;
 			} else if (sY < 0) {
 				characterRow = 0;
 			} else if (sY > 0) {
-				characterRow = 2;
+				characterRow = 1;
 			} else {
-				characterRow = 2;
+				characterRow = 1;
 				frameIndex = 0;
 			}
 
