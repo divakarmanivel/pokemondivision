@@ -1,6 +1,6 @@
 function renderer() {
 
-	var characterRow = 2;
+	var characterRow = 1;
 	var frameIndex = 0;
 	var tickCount = 0;
 	var ticksPerFrame = 2;
@@ -29,8 +29,8 @@ function renderer() {
 						16,
 						j * tileSize,
 						i * tileSize,
-						tileSize,
-						tileSize);
+						tileSize + 1,
+						tileSize + 1);
 				}
 			}
 		}
@@ -86,8 +86,8 @@ function renderer() {
 			sHeight,
 			destinationX,
 			destinationY,
-			tileSize,
-			tileSize);
+			tileSize + 1,
+			tileSize + 1);
 	}
 
 	// update the game variables with this function
@@ -122,7 +122,7 @@ function renderer() {
 				difY = difY + sY;
 				sX = 0;
 				sY = 0;
-				var steps = 6;
+				var steps = 2;
 				if (difX >= steps) {
 					movement = true;
 					camX += tileSize;
@@ -146,6 +146,8 @@ function renderer() {
 					difY += steps;
 				}
 			}
+		} else {
+			frameIndex = 0;
 		}
 		// update the game
 		window.requestAnimationFrame(updateGame);

@@ -6,24 +6,28 @@ Pokémon Division is an online MMORPG based on the famous Pokémon gameboy games
 This game is a work in progress with lots of improvements to be done.
 
 Currently I am working on:
-* Adding pokemon to the roster.
-* Adding npcs for the player to interact.
-* Add a rich map generator to the game for extensive gameplay.
-* Add proper sprites for the character and surroundings.
-* Add a storyline to kickstart the game.
-* Add a Pokédex with updated Pokémon data.
+* Adding more pokemon to the roster - *In Progress*
+* Adding npcs for the player to interact - *In Progress*
+* Add a rich map generator to the game for extensive gameplay - *In Progress*
+* Add proper sprites for the character and surroundings - *Completed*
+* Add a storyline to kickstart the game - *In Progress*
+* Add a Pokédex with updated Pokémon data - *In Progress*
+
+# Gameplay
+
+![Gamplay gif](/images/gameplay.gif "Gameplay gif")
 
 ## Controls in Game
 
-When playing on a desktop use w,a,s,d to move the character.
+When playing on a desktop use w,a,s,d keys or up,down,left,right keys to move the character.
 
-When playing on a touch enabled device touch and drag on the screen to move the character in the desired direction.
+When playing on a touch enabled device, hold down on the screen to enable to touch ontroller and drag to move in the desired direction.
 
 For a live demo visit [Pokémon Division](https://divakarmanivel.github.io/pokemondivision/) on desktop or mobile.
 
 ## Contributing
 
-I welcome pull requests from all Pokémon fans and seasoned JavaScript developers alike! Thanks in advance! For more details on how to contribute, visit our [Contribution](CONTRIBUTING.md) page and [Pull Request Template](PULL_REQUEST_TEMPLATE.md) page.
+I welcome pull requests from all Pokémon fans and developers alike! Thanks in advance! For more details on how to contribute, visit our [Contribution](CONTRIBUTING.md) page and [Pull Request Template](PULL_REQUEST_TEMPLATE.md) page.
 
 ## Code of Conduct
 

@@ -112,6 +112,22 @@ function multiTouch() {
 				console.log("down");
 				sY = 1;
 				break;
+			case 37:
+				console.log("left");
+				sX = -1;
+				break;
+			case 38:
+				console.log("up");
+				sY = -1;
+				break;
+			case 39:
+				console.log("right");
+				sX = 1;
+				break;
+			case 40:
+				console.log("down");
+				sY = 1;
+				break;				
 		}
 	}, false);
 
@@ -129,6 +145,18 @@ function multiTouch() {
 			case 83:
 				sY = 0;
 				break;
+			case 37:
+				sX = 0;
+				break;
+			case 38:
+				sY = 0;
+				break;
+			case 39:
+				sX = 0;
+				break;
+			case 40:
+				sY = 0;
+				break;	
 		}
 	}, false);
 }
