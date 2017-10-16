@@ -47,36 +47,41 @@ function multiTouch() {
 			for (var i = 0; i < touches.length; i++) {
 				mx = touches[i].clientX - startTouchX;
 				my = touches[i].clientY - startTouchY;
-				angle = Math.round(Math.atan2(my, mx) * 180 / Math.PI);
-				if (angle > 0) {
-					if (angle > 0 && angle < 45) {
-						console.log("right");
-						sX = 1
-						sY = 0;
-					} else if (angle > 45 && angle < 135) {
-						console.log("down");
-						sY = 1;
-						sX = 0;
-					} else if (angle > 135 && angle < 180) {
-						console.log("left");
-						sX = -1;
-						sY = 0;
+				if (Math.abs(mx) > 60 || Math.abs(my) > 60) {
+					angle = Math.round(Math.atan2(my, mx) * 180 / Math.PI);
+					if (angle > 0) {
+						if (angle > 0 && angle < 45) {
+							console.log("right");
+							sX = 1
+							sY = 0;
+						} else if (angle > 45 && angle < 135) {
+							console.log("down");
+							sY = 1;
+							sX = 0;
+						} else if (angle > 135 && angle < 180) {
+							console.log("left");
+							sX = -1;
+							sY = 0;
+						}
+					} else if (angle < 0) {
+						angle = Math.abs(angle);
+						if (angle > 0 && angle < 45) {
+							console.log("right");
+							sX = 1;
+							sY = 0;
+						} else if (angle > 45 && angle < 135) {
+							console.log("up");
+							sY = -1;
+							sX = 0;
+						} else if (angle > 135 && angle < 180) {
+							console.log("left");
+							sX = -1;
+							sY = 0;
+						}
 					}
-				} else if (angle < 0) {
-					angle = Math.abs(angle);
-					if (angle > 0 && angle < 45) {
-						console.log("right");
-						sX = 1;
-						sY = 0;
-					} else if (angle > 45 && angle < 135) {
-						console.log("up");
-						sY = -1;
-						sX = 0;
-					} else if (angle > 135 && angle < 180) {
-						console.log("left");
-						sX = -1;
-						sY = 0;
-					}
+				} else {
+					sX = 0;
+					sY = 0;
 				}
 				touchcontext.beginPath();
 				touchcontext.strokeStyle = "cyan";
@@ -127,7 +132,7 @@ function multiTouch() {
 			case 40:
 				console.log("down");
 				sY = 1;
-				break;				
+				break;
 		}
 	}, false);
 
@@ -156,7 +161,7 @@ function multiTouch() {
 				break;
 			case 40:
 				sY = 0;
-				break;	
+				break;
 		}
 	}, false);
 }

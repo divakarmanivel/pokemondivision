@@ -15,14 +15,18 @@ var movement = false;
 /* Level Setup */
 ////////////////
 
-var maps = initMap(100, 100);
-var map = maps.map;
+var maps = initMap(1, 100, 100);
+var path_map = maps.path_map;
 var obstacle_map = maps.obstacle_map;
-var mapCols = map[1].length; // level width, in tiles
-var mapRows = map.length; // level height, in tiles
+var npc_map = maps.npc_map;
+var mapCols = path_map[1].length; // level width, in tiles
+var mapRows = path_map.length; // level height, in tiles
 var tileSize = 32; // tile size, in pixels
-
-setPokemon(map, obstacle_map, 2, 2, 2, true);
+setBorders();
+setMovingNPC(2, 2, 2);
+setMovingNPC(18, 5, 30);
+setRotatingNPC(2, 10, 16);
+setRotatingNPC(15, 14, 8);
 
 ///////////////////
 /* Canvas Setup */
@@ -129,6 +133,8 @@ function loadPokemonDatabase() {
 					pokeContext.clearRect(0, 0, pokeCanvas.width, pokeCanvas.height);
 				}
 			}
+			pokemonTiles.push(flipCanvas(pokemonTiles[5]));
+			pokemonTiles.push(flipCanvas(pokemonTiles[4]));
 			pokemonData.sprites = pokemonTiles;
 			pokemonDatabase[i] = pokemonData;
 		}
@@ -148,6 +154,22 @@ function cloneCanvas(oldCanvas) {
 	//set dimensions
 	newCanvas.width = oldCanvas.width;
 	newCanvas.height = oldCanvas.height;
+	//apply the old canvas to the new one
+	context.drawImage(oldCanvas, 0, 0);
+	//return the new canvas
+	return newCanvas;
+}
+
+function flipCanvas(oldCanvas) {
+	//create a new canvas
+	var newCanvas = document.createElement('canvas');
+	var context = newCanvas.getContext('2d');
+	//set dimensions
+	newCanvas.width = oldCanvas.width;
+	newCanvas.height = oldCanvas.height;
+	//flip canvas
+	context.translate(newCanvas.width, 0);
+	context.scale(-1, 1);
 	//apply the old canvas to the new one
 	context.drawImage(oldCanvas, 0, 0);
 	//return the new canvas

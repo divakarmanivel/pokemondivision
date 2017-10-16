@@ -7,41 +7,9 @@ function renderer() {
 	var numberOfFrames = 3;
 	var bgRendered = false;
 
-	function renderBackground() {
-		if (!loading) {
-			bgRendered = true;
-			bgcontext.clearRect(0, 0, bgcanvas.width, bgcanvas.height);
-			var w = Math.floor(camWidth / tileSize);
-			var h = Math.floor(camHeight / tileSize);
-			if (mapCols < w) {
-				w = mapCols - 1;
-			}
-			if (mapRows < h) {
-				h = mapRows - 1;
-			}
-			for (var i = 0; i <= h; i++) {
-				for (var j = 0; j <= w; j++) {
-					bgcontext.drawImage(
-						outdoorTiles,
-						103,
-						1,
-						16,
-						16,
-						j * tileSize,
-						i * tileSize,
-						tileSize + 1,
-						tileSize + 1);
-				}
-			}
-		}
-	}
-
 	// render the level
 	function renderLevel() {
 		if (!loading) {
-			if (!bgRendered) {
-				renderBackground();
-			}
 			var startCol = Math.floor(camX / tileSize);
 			var endCol = startCol + Math.floor(camWidth / tileSize);
 			var startRow = Math.floor(camY / tileSize);
@@ -58,19 +26,26 @@ function renderer() {
 					var x = (i - startRow) * tileSize - offsetX;
 					var y = (j - startCol) * tileSize - offsetY;
 					if (i >= 0 && j >= 0 && i < mapRows && j < mapCols) {
-						var tile = map[i][j];
-						if (tile == 1 && tile != null) {
-							drawTile(outdoorTiles, 120, 1, 16, 16, y, x);
-						} else if (tile == 2 && tile != null) {
-							var pokemon = pokemonDatabase[1].sprites[2];
-							drawTile(pokemon, 0, 0, tileSize, tileSize, y, x);
+						var path_tile = path_map[i][j]; //first draw the path layers
+						if (path_tile == 0 && path_tile != null) {
+							drawTile(outdoorTiles, 103, 1, 16, 16, y, x); //draw grass tile
+						}
+						var obstacle_tile = obstacle_map[i][j]; //second draw the object layers
+						if (obstacle_tile == 1 && obstacle_tile != null) {
+							drawTile(outdoorTiles, 120, 1, 16, 16, y, x); //draw bush tile
+						}
+						var npc_tile = npc_map[i][j]; //lastly draw the npc layers
+						if (npc_tile != 0 && npc_tile != null) {
+							var sprite = npc_data["m:" + 1 + "r:" + i + "c:" + j].frameIndex;
+							var pokemon = pokemonDatabase[npc_tile].sprites[sprite];
+							drawTile(pokemon, 0, 0, tileSize, tileSize, y, x); //draw pokemon tile
 						}
 					} else {
-						drawTile(outdoorTiles, 1, 1, 16, 16, y, x);
+						drawTile(outdoorTiles, 1, 1, 16, 16, y, x); //draw sand tile when the view is outside the map
 					}
 				}
 			}
-			// draw player
+			// draw player tile
 			drawTile(charTiles, frameIndex * 32, characterRow * 32, 32, 32, playerCol * tileSize, playerRow * tileSize);
 		}
 	}
