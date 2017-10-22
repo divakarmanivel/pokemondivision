@@ -19,7 +19,16 @@ Currently I am working on:
 
 ## Controls in Game
 
-When playing on a desktop use w,a,s,d keys or up,down,left,right keys to move the character.
+When playing on a desktop use a mouse or the following keyboard keys,
+
+Move UP - w or up arrow\
+Move DOWN - s or down arrow\
+Move LEFT - a or left arrow\
+Move RIGHT - d or right arrow\
+Button A - j\
+Button B - k\
+START - enter key\
+SELECT - shift key
 
 When playing on a touch enabled device, hold down on the screen to enable to touch ontroller and drag to move in the desired direction.
 

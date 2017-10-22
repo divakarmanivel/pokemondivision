@@ -3,9 +3,8 @@ function renderer() {
 	var characterRow = 1;
 	var frameIndex = 0;
 	var tickCount = 0;
-	var ticksPerFrame = 2;
+	var ticksPerFrame = 0;
 	var numberOfFrames = 3;
-	var bgRendered = false;
 
 	// render the level
 	function renderLevel() {
@@ -97,7 +96,7 @@ function renderer() {
 				difY = difY + sY;
 				sX = 0;
 				sY = 0;
-				var steps = 2;
+				var steps = 1;
 				if (difX >= steps) {
 					movement = true;
 					camX += tileSize;

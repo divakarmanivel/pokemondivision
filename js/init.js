@@ -10,6 +10,10 @@ var difY = 0;
 var sX = 0;
 var sY = 0;
 var movement = false;
+var btn_a;
+var btn_b;
+var btn_start;
+var btn_select;
 
 //////////////////
 /* Level Setup */
@@ -87,6 +91,24 @@ outdoorTiles.src = "images/outdoor.png";
 
 var charTiles = new Image();
 charTiles.src = "images/hero_overworld.png";
+
+var controls_inner = new Image();
+controls_inner.src = "images/controls_inner.png";
+
+var controls_outer = new Image();
+controls_outer.src = "images/controls_outer.png";
+
+var controls_a = new Image();
+controls_a.src = "images/controls_a.png";
+
+var controls_b = new Image();
+controls_b.src = "images/controls_b.png";
+
+var controls_start = new Image();
+controls_start.src = "images/controls_start.png";
+
+var controls_select = new Image();
+controls_select.src = "images/controls_select.png";
 
 /////////////////////////////
 /* Pokemon database setup */

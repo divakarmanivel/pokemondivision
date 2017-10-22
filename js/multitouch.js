@@ -4,45 +4,183 @@ function multiTouch() {
 	document.addEventListener('touchmove', process_touchmove, false);
 	document.addEventListener('touchcancel', process_touchcancel, false);
 	document.addEventListener('touchend', process_touchend, false);
+	document.addEventListener("mousedown", process_mousestart, false);
+	document.addEventListener("mousemove", process_mousemove, false);
+	document.addEventListener("mouseup", process_mouseend, false);
+
+	var mouse;
 	var startTouchX;
 	var startTouchY;
-	var touches;
+	var touches = [];
 
 	function process_touchstart(ev) {
-		console.log("touchstart");
 		startTouchX = ev.changedTouches[0].clientX;
 		startTouchY = ev.changedTouches[0].clientY;
-		touches = ev.touches;
+		if (startTouchX >= (touchcanvas.width - controls_a.width * 2) &&
+			startTouchX <= (touchcanvas.width - controls_a.width * 2 + controls_a.width) &&
+			startTouchY >= (touchcanvas.height - controls_a.height - 10) &&
+			startTouchY <= (touchcanvas.height - controls_a.height - 10 + controls_a.height)) {
+			console.log("a");
+			btn_a = 1;
+		} else if (startTouchX >= (touchcanvas.width - controls_b.width - 10) &&
+			startTouchX <= (touchcanvas.width - controls_b.width - 10 + controls_b.width) &&
+			startTouchY >= (touchcanvas.height - controls_b.height * 2) &&
+			startTouchY <= (touchcanvas.height - controls_b.height * 2 + controls_b.height)) {
+			console.log("b");
+			btn_b = 1;
+		} else if (startTouchX >= 10 &&
+			startTouchX <= (10 + controls_start.width) &&
+			startTouchY >= 10 &&
+			startTouchY <= (10 + controls_start.height)) {
+			console.log("start");
+			btn_start = 1;
+		} else if (startTouchX >= touchcanvas.width - controls_select.width - 10 &&
+			startTouchX <= (touchcanvas.width - controls_select.width - 10 + controls_select.width) &&
+			startTouchY >= 10 &&
+			startTouchY <= (10 + controls_select.height)) {
+			console.log("select");
+			btn_select = 1;
+		} else {
+			touches = ev.touches;
+		}
 		return;
 	}
 
 	function process_touchend(ev) {
-		console.log("touchend");
 		touchcontext.clearRect(0, 0, touchcanvas.width, touchcanvas.height);
 		touches = null;
 		sX = 0;
 		sY = 0;
+		btn_a = 0;
+		btn_b = 0;
+		btn_start = 0;
+		btn_select = 0;
 		return;
 	}
 
 	function process_touchmove(ev) {
 		ev.preventDefault();
-		console.log("touchmove");
 		touches = ev.touches;
 		return;
 	}
 
 	function process_touchcancel(ev) {
-		console.log("touchcancel");
 		touchcontext.clearRect(0, 0, touchcanvas.width, touchcanvas.height);
 		touches = null;
 		sX = 0;
 		sY = 0;
+		btn_a = 0;
+		btn_b = 0;
+		btn_start = 0;
+		btn_select = 0;
+		return;
+	}
+
+	function process_mousestart(ev) {
+		startTouchX = ev.clientX;
+		startTouchY = ev.clientY;
+		if (startTouchX >= (touchcanvas.width - controls_a.width * 2) &&
+			startTouchX <= (touchcanvas.width - controls_a.width * 2 + controls_a.width) &&
+			startTouchY >= (touchcanvas.height - controls_a.height - 10) &&
+			startTouchY <= (touchcanvas.height - controls_a.height - 10 + controls_a.height)) {
+			console.log("a");
+			btn_a = 1;
+		} else if (startTouchX >= (touchcanvas.width - controls_b.width - 10) &&
+			startTouchX <= (touchcanvas.width - controls_b.width - 10 + controls_b.width) &&
+			startTouchY >= (touchcanvas.height - controls_b.height * 2) &&
+			startTouchY <= (touchcanvas.height - controls_b.height * 2 + controls_b.height)) {
+			console.log("b");
+			btn_b = 1;
+		} else if (startTouchX >= 10 &&
+			startTouchX <= (10 + controls_start.width) &&
+			startTouchY >= 10 &&
+			startTouchY <= (10 + controls_start.height)) {
+			console.log("start");
+			btn_start = 1;
+		} else if (startTouchX >= touchcanvas.width - controls_select.width - 10 &&
+			startTouchX <= (touchcanvas.width - controls_select.width - 10 + controls_select.width) &&
+			startTouchY >= 10 &&
+			startTouchY <= (10 + controls_select.height)) {
+			console.log("select");
+			btn_select = 1;
+		} else {
+			mouse = true;
+		}
+		return;
+	}
+
+	function process_mousemove(ev) {
+		ev.preventDefault();
+		if (mouse == true) {
+			touches = [];
+			var mouses = [];
+			mouses.clientX = ev.clientX;
+			mouses.clientY = ev.clientY;
+			touches.push(mouses);
+		}
+		return;
+	}
+
+	function process_mouseend(ev) {
+		mouse = false;
+		touchcontext.clearRect(0, 0, touchcanvas.width, touchcanvas.height);
+		touches = null;
+		sX = 0;
+		sY = 0;
+		btn_a = 0;
+		btn_b = 0;
+		btn_start = 0;
+		btn_select = 0;
 		return;
 	}
 
 	function updateTouch() {
 		touchcontext.clearRect(0, 0, touchcanvas.width, touchcanvas.height);
+
+		touchcontext.drawImage(
+			controls_start,
+			0,
+			0,
+			controls_start.width,
+			controls_start.height,
+			10,
+			10,
+			controls_start.width,
+			controls_start.height);
+
+		touchcontext.drawImage(
+			controls_select,
+			0,
+			0,
+			controls_select.width,
+			controls_select.height,
+			touchcanvas.width - controls_select.width - 10,
+			10,
+			controls_select.width,
+			controls_select.height);
+
+		touchcontext.drawImage(
+			controls_a,
+			0,
+			0,
+			controls_a.width,
+			controls_a.height,
+			touchcanvas.width - controls_a.width * 2,
+			touchcanvas.height - controls_a.height - 10,
+			controls_a.width,
+			controls_a.height);
+
+		touchcontext.drawImage(
+			controls_b,
+			0,
+			0,
+			controls_b.width,
+			controls_b.height,
+			touchcanvas.width - controls_a.width - 10,
+			touchcanvas.height - controls_a.height * 2,
+			controls_b.width,
+			controls_b.height);
+
 		if (touches && touches.length) {
 			for (var i = 0; i < touches.length; i++) {
 				mx = touches[i].clientX - startTouchX;
@@ -52,7 +190,7 @@ function multiTouch() {
 					if (angle > 0) {
 						if (angle > 0 && angle < 45) {
 							console.log("right");
-							sX = 1
+							sX = 1;
 							sY = 0;
 						} else if (angle > 45 && angle < 135) {
 							console.log("down");
@@ -83,15 +221,27 @@ function multiTouch() {
 					sX = 0;
 					sY = 0;
 				}
-				touchcontext.beginPath();
-				touchcontext.strokeStyle = "cyan";
-				touchcontext.lineWidth = 2;
-				touchcontext.arc(startTouchX, startTouchY, 60, 0, Math.PI * 2, true);
-				touchcontext.stroke();
-				touchcontext.beginPath();
-				touchcontext.strokeStyle = "cyan";
-				touchcontext.arc(touches[i].clientX, touches[i].clientY, 40, 0, Math.PI * 2, true);
-				touchcontext.stroke();
+
+				touchcontext.drawImage(
+					controls_outer,
+					0,
+					0,
+					controls_outer.width,
+					controls_outer.height,
+					startTouchX - controls_outer.width / 2,
+					startTouchY - controls_outer.height / 2,
+					controls_outer.width,
+					controls_outer.height);
+				touchcontext.drawImage(
+					controls_inner,
+					0,
+					0,
+					controls_inner.width,
+					controls_inner.height,
+					touches[i].clientX - controls_inner.width / 2,
+					touches[i].clientY - controls_inner.height / 2,
+					controls_inner.width,
+					controls_inner.height);
 			}
 		}
 		window.requestAnimationFrame(updateTouch);
@@ -133,6 +283,22 @@ function multiTouch() {
 				console.log("down");
 				sY = 1;
 				break;
+			case 73:
+				console.log("a");
+				btn_a = 1;
+				break;
+			case 74:
+				console.log("b");
+				btn_b = 1;
+				break;
+			case 16:
+				console.log("select");
+				btn_select = 1;
+				break;
+			case 13:
+				console.log("start");
+				btn_start = 1;
+				break;
 		}
 	}, false);
 
@@ -161,6 +327,18 @@ function multiTouch() {
 				break;
 			case 40:
 				sY = 0;
+				break;
+			case 73:
+				btn_a = 0;
+				break;
+			case 74:
+				btn_b = 0;
+				break;
+			case 16:
+				btn_select = 0;
+				break;
+			case 13:
+				btn_start = 0;
 				break;
 		}
 	}, false);
