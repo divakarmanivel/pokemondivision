@@ -31,6 +31,7 @@ setMovingNPC(2, 2, 2);
 setMovingNPC(18, 5, 30);
 setRotatingNPC(2, 10, 16);
 setRotatingNPC(15, 14, 8);
+setMovingNPC(4, 6, 2000);
 
 ///////////////////
 /* Canvas Setup */
@@ -86,12 +87,6 @@ var playerXPos = playerCol * tileSize; // player X position in pixels
 /* Load images */
 ////////////////
 
-var outdoorTiles = new Image();
-outdoorTiles.src = "images/outdoor.png";
-
-var charTiles = new Image();
-charTiles.src = "images/hero_overworld.png";
-
 var controls_inner = new Image();
 controls_inner.src = "images/controls_inner.png";
 
@@ -109,6 +104,15 @@ controls_start.src = "images/controls_start.png";
 
 var controls_select = new Image();
 controls_select.src = "images/controls_select.png";
+
+var outdoorTiles = new Image();
+outdoorTiles.src = "images/outdoor.png";
+
+var charTiles = new Image();
+charTiles.src = "images/hero_overworld.png";
+
+var npcTiles = new Image();
+npcTiles.src = "images/npc_overworld.png";
 
 /////////////////////////////
 /* Pokemon database setup */
@@ -160,9 +164,65 @@ function loadPokemonDatabase() {
 			pokemonData.sprites = pokemonTiles;
 			pokemonDatabase[i] = pokemonData;
 		}
-		loading = false;
 	}
 	pokemonTileSet.src = 'images/pokemon_overworld.png';
+}
+
+/////////////////////////////
+/* NPC database setup */
+///////////////////////////
+
+loadNPCDatabase();
+var NPCDatabase = []; // Collection of all Pokemon data stores as database
+function loadNPCDatabase() {
+	var NPCData = []; // Individual Pokemon data
+	var NPCTiles = []; // Individual Pokemon sprite collection
+
+	var NPCCanvas = document.createElement('canvas');
+	var NPCContext = NPCCanvas.getContext('2d');
+	NPCCanvas.height = tileSize;
+	NPCCanvas.width = tileSize;
+	var NPCTileSet = new Image();
+	NPCTileSet.onload = function () {
+		for (var i = 0; i < 1; i++) {
+			NPCData = []; // Reset as we are obtaining data for a new Pokemon
+			NPCTiles = [];
+			/*
+			var NPC = NPC_data[i];
+			NPCData.generation = parseInt(NPC.A);
+			NPCData.id = parseInt(NPC.B);
+			NPCData.name = NPC.C;
+			NPCData.primaryType = NPC.D;
+			NPCData.secondaryType = NPC.E;
+			NPCData.evolutionLevel = parseInt(NPC.F);
+			*/
+			for (var j = 0; j < 3; j++) {
+				for (var k = 0; k < 2; k++) {
+					var xPos = 0;
+					var yPos = 0;
+					var size = 32;
+					NPCContext.drawImage(
+						NPCTileSet,
+						xPos + (k * size),
+						yPos + (j * size),
+						size,
+						size,
+						0,
+						0,
+						tileSize,
+						tileSize);
+					NPCTiles.push(cloneCanvas(NPCCanvas));
+					NPCContext.clearRect(0, 0, NPCCanvas.width, NPCCanvas.height);
+				}
+			}
+			NPCTiles.push(flipCanvas(NPCTiles[5]));
+			NPCTiles.push(flipCanvas(NPCTiles[4]));
+			NPCData.sprites = NPCTiles;
+			NPCDatabase[i] = NPCData;
+		}
+		loading = false;
+	}
+	NPCTileSet.src = 'images/npc_overworld.png';
 }
 
 ///////////////////////
