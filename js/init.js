@@ -173,10 +173,10 @@ function loadPokemonDatabase() {
 ///////////////////////////
 
 loadNPCDatabase();
-var NPCDatabase = []; // Collection of all Pokemon data stores as database
+var NPCDatabase = []; // Collection of all NPC data stores as database
 function loadNPCDatabase() {
-	var NPCData = []; // Individual Pokemon data
-	var NPCTiles = []; // Individual Pokemon sprite collection
+	var NPCData = []; // Individual NPC data
+	var NPCTiles = []; // Individual NPC sprite collection
 
 	var NPCCanvas = document.createElement('canvas');
 	var NPCContext = NPCCanvas.getContext('2d');
@@ -185,7 +185,7 @@ function loadNPCDatabase() {
 	var NPCTileSet = new Image();
 	NPCTileSet.onload = function () {
 		for (var i = 0; i < 1; i++) {
-			NPCData = []; // Reset as we are obtaining data for a new Pokemon
+			NPCData = []; // Reset as we are obtaining data for a new NPC
 			NPCTiles = [];
 			/*
 			var NPC = NPC_data[i];
