@@ -35,6 +35,9 @@ setMovingPokemon(18, 5, 30);
 setRotatingPokemon(2, 10, 16);
 setRotatingPokemon(15, 14, 8);
 setMovingNPC(4, 6, 2000);
+setMovingNPC(6, 9, 2000);
+setRotatingNPC(14, 2, 2000);
+setRotatingNPC(9, 6, 2000);
 
 ///////////////////
 /* Canvas Setup */
@@ -165,9 +168,7 @@ function loadPokemonDatabase() {
 			pokemonDatabase[i] = pokemonData;
 		}
 		loadingPokemon = false;
-		if (loadingNPC == false) {
-			loading = false;
-		}
+		checkRender();
 	}
 	pokemonTileSet.src = 'images/pokemon_overworld.png';
 }
@@ -225,9 +226,7 @@ function loadNPCDatabase() {
 			NPCDatabase[i] = NPCData;
 		}
 		loadingNPC = false;
-		if (loadingPokemon == false) {
-			loading = false;
-		}
+		checkRender();
 	}
 	NPCTileSet.src = 'images/npc_overworld.png';
 }
@@ -235,6 +234,12 @@ function loadNPCDatabase() {
 ///////////////////////
 /* Helper functions */
 /////////////////////
+
+function checkRender() {
+	if (loadingPokemon == false && loadingNPC == false) {
+		loading = false;
+	}
+}
 
 function cloneCanvas(oldCanvas) {
 	//create a new canvas
