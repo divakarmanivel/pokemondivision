@@ -37,14 +37,22 @@ function renderer() {
 						if (npc_tile != 0 && npc_tile != null) {
 							var spriteID = npc_data["m:" + 1 + "r:" + i + "c:" + j].value;
 							var sprite = npc_data["m:" + 1 + "r:" + i + "c:" + j].frameIndex;
-							if(spriteID>=2000){
-							var NPC = NPCDatabase[(npc_tile-2000)].sprites[sprite];
-							drawTile(NPC, 0, 0, tileSize, tileSize, y, x); //draw npc tile 
-								 } else {
-							var pokemon = pokemonDatabase[npc_tile].sprites[sprite];
-							drawTile(pokemon, 0, 0, tileSize, tileSize, y, x); //draw pokemon tile
+							if (spriteID >= 2000) {
+								var NPC = NPCDatabase[(npc_tile - 2000)].sprites[sprite];
+								drawTile(NPC, 0, 0, tileSize, tileSize, y, x); //draw npc tile 
+							}
 						}
+
+						var pokemon_tile = pokemon_map[i][j]; //lastly draw the npc layers
+						if (pokemon_tile != 0 && pokemon_tile != null) {
+							var pokemonID = pokemon_data["m:" + 1 + "r:" + i + "c:" + j].value;
+							var pokemonFrame = pokemon_data["m:" + 1 + "r:" + i + "c:" + j].frameIndex;
+							if (pokemonID < 2000) {
+								var pokemon = pokemonDatabase[pokemon_tile].sprites[pokemonFrame];
+								drawTile(pokemon, 0, 0, tileSize, tileSize, y, x); //draw pokemon tile
+							}
 						}
+
 					} else {
 						drawTile(outdoorTiles, 1, 1, 16, 16, y, x); //draw sand tile when the view is outside the map
 					}

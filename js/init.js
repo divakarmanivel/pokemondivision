@@ -3,6 +3,8 @@
 /////////////////
 
 var loading = true;
+var loadingNPC = true;
+var loadingPokemon = true;
 
 // global variables to calculate movement
 var difX = 0;
@@ -23,14 +25,15 @@ var maps = initMap(1, 100, 100);
 var path_map = maps.path_map;
 var obstacle_map = maps.obstacle_map;
 var npc_map = maps.npc_map;
+var pokemon_map = maps.pokemon_map;
 var mapCols = path_map[1].length; // level width, in tiles
 var mapRows = path_map.length; // level height, in tiles
 var tileSize = 32; // tile size, in pixels
 setBorders();
-setMovingNPC(2, 2, 2);
-setMovingNPC(18, 5, 30);
-setRotatingNPC(2, 10, 16);
-setRotatingNPC(15, 14, 8);
+setMovingPokemon(2, 2, 2);
+setMovingPokemon(18, 5, 30);
+setRotatingPokemon(2, 10, 16);
+setRotatingPokemon(15, 14, 8);
 setMovingNPC(4, 6, 2000);
 
 ///////////////////
@@ -111,9 +114,6 @@ outdoorTiles.src = "images/outdoor.png";
 var charTiles = new Image();
 charTiles.src = "images/hero_overworld.png";
 
-var npcTiles = new Image();
-npcTiles.src = "images/npc_overworld.png";
-
 /////////////////////////////
 /* Pokemon database setup */
 ///////////////////////////
@@ -129,7 +129,7 @@ function loadPokemonDatabase() {
 	pokeCanvas.height = tileSize;
 	pokeCanvas.width = tileSize;
 	var pokemonTileSet = new Image();
-	pokemonTileSet.onload = function () {
+	pokemonTileSet.onload = function() {
 		for (var i = 1; i < pokemon_data.length; i++) {
 			pokemonData = []; // Reset as we are obtaining data for a new Pokemon
 			pokemonTiles = [];
@@ -164,6 +164,10 @@ function loadPokemonDatabase() {
 			pokemonData.sprites = pokemonTiles;
 			pokemonDatabase[i] = pokemonData;
 		}
+		loadingPokemon = false;
+		if (loadingNPC == false) {
+			loading = false;
+		}
 	}
 	pokemonTileSet.src = 'images/pokemon_overworld.png';
 }
@@ -183,7 +187,7 @@ function loadNPCDatabase() {
 	NPCCanvas.height = tileSize;
 	NPCCanvas.width = tileSize;
 	var NPCTileSet = new Image();
-	NPCTileSet.onload = function () {
+	NPCTileSet.onload = function() {
 		for (var i = 0; i < 1; i++) {
 			NPCData = []; // Reset as we are obtaining data for a new NPC
 			NPCTiles = [];
@@ -220,7 +224,10 @@ function loadNPCDatabase() {
 			NPCData.sprites = NPCTiles;
 			NPCDatabase[i] = NPCData;
 		}
-		loading = false;
+		loadingNPC = false;
+		if (loadingPokemon == false) {
+			loading = false;
+		}
 	}
 	NPCTileSet.src = 'images/npc_overworld.png';
 }
@@ -259,10 +266,10 @@ function flipCanvas(oldCanvas) {
 }
 
 function disableScrolling(scrollCanvas) {
-	document.getElementById(scrollCanvas).onwheel = function (event) {
+	document.getElementById(scrollCanvas).onwheel = function(event) {
 		event.preventDefault();
 	};
-	document.getElementById(scrollCanvas).onmousewheel = function (event) {
+	document.getElementById(scrollCanvas).onmousewheel = function(event) {
 		event.preventDefault();
 	};
 }

@@ -24,7 +24,7 @@ function collisionCheckNPC(column, row) {
 	// check for collisions
 	var collision = false;
 
-	if (obstacle_map[row][column] != 0 || npc_map[row][column] != 0 || (column == Math.round(playerXPos / tileSize) && row == Math.round(playerYPos / tileSize))) {
+	if (obstacle_map[row][column] != 0 || npc_map[row][column] != 0 || pokemon_map[row][column] != 0 || (column == Math.round(playerXPos / tileSize) && row == Math.round(playerYPos / tileSize))) {
 		collision = true;
 	}
 	return collision;
