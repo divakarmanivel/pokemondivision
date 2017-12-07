@@ -40,7 +40,7 @@ function initMap(map_num, numrows, numcols) {
 function setBorders() {
 	for (var i = 0; i < path_map.length; i++) {
 		for (var j = 0; j < path_map[1].length; j++) {
-			if (i == 0 || j == 0 || i == path_map.length - 1 || j == path_map[1].length - 1) {
+			if (i === 0 || j === 0 || i == path_map.length - 1 || j == path_map[1].length - 1) {
 				setObject(i, j, 1);
 			}    
 		}
@@ -137,9 +137,10 @@ function setMovingPokemon(row, col, value)  {
 
 function updateNPCMapData() {
 	var keyat = rotating_npc_keys.length * Math.random() << 0;
-	if (keyat != undefined && keyat != 0) {
-		var npc = rotating_npc_data[rotating_npc_keys[keyat]];
-		if (npc.map_num != undefined && npc.row != undefined && npc.col != undefined && npc.value != undefined) {
+	var npc;
+	if (keyat !== undefined && keyat !== 0) {
+		npc = rotating_npc_data[rotating_npc_keys[keyat]];
+		if (npc.map_num !== undefined && npc.row !== undefined && npc.col !== undefined && npc.value !== undefined) {
 			var rotating_npc = [];
 			var rand = Math.floor(Math.random() * 8);
 			rotating_npc.map_num = npc.map_num;
@@ -153,9 +154,9 @@ function updateNPCMapData() {
 	}
 
 	keyat = moving_npc_keys.length * Math.random() << 0;
-	if (keyat != undefined && keyat != 0) {
+	if (keyat !== undefined && keyat !== 0) {
 		npc = moving_npc_data[moving_npc_keys[keyat]];
-		if (npc.map_num != undefined && npc.row != undefined && npc.col != undefined && npc.value != undefined) {
+		if (npc.map_num !== undefined && npc.row !== undefined && npc.col !== undefined && npc.value !== undefined) {
 			var row = Math.floor(Math.random() * 2);
 			row *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
 			var col = Math.floor(Math.random() * 2);
@@ -198,9 +199,10 @@ function updateNPCMapData() {
 
 function updatePokemonMapData() {
 	var keyat = rotating_pokemon_keys.length * Math.random() << 0;
-	if (keyat != undefined && keyat != 0) {
-		var pokemon = rotating_pokemon_data[rotating_pokemon_keys[keyat]];
-		if (pokemon.map_num != undefined && pokemon.row != undefined && pokemon.col != undefined && pokemon.value != undefined) {
+	var pokemon;
+	if (keyat !== undefined && keyat !== 0) {
+		pokemon = rotating_pokemon_data[rotating_pokemon_keys[keyat]];
+		if (pokemon.map_num !== undefined && pokemon.row !== undefined && pokemon.col !== undefined && pokemon.value !== undefined) {
 			var rotating_pokemon = [];
 			var rand = Math.floor(Math.random() * 8);
 			rotating_pokemon.map_num = pokemon.map_num;
@@ -214,9 +216,9 @@ function updatePokemonMapData() {
 	}
 
 	keyat = moving_pokemon_keys.length * Math.random() << 0;
-	if (keyat != undefined && keyat != 0) {
+	if (keyat !== undefined && keyat !== 0) {
 		pokemon = moving_pokemon_data[moving_pokemon_keys[keyat]];
-		if (pokemon.map_num != undefined && pokemon.row != undefined && pokemon.col != undefined && pokemon.value != undefined) {
+		if (pokemon.map_num !== undefined && pokemon.row !== undefined && pokemon.col !== undefined && pokemon.value !== undefined) {
 			var row = Math.floor(Math.random() * 2);
 			row *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
 			var col = Math.floor(Math.random() * 2);

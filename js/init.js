@@ -49,6 +49,8 @@ var canvas = document.getElementById("canvas"); // the canvas where game will be
 var context = canvas.getContext("2d"); // canvas context
 var touchcanvas = document.getElementById("touchcanvas"); // the touch canvas where joystick will be drawn
 var touchcontext = touchcanvas.getContext("2d"); // touch canvas context
+var mapcanvas = document.getElementById("mapcanvas"); // the touch canvas where joystick will be drawn
+var mapcontext = mapcanvas.getContext("2d"); // touch canvas context
 
 var screenWidth = window.innerWidth || screen.width; // screen width
 var screenHeight = window.innerHeight || screen.height; // screen height
@@ -58,10 +60,13 @@ bgcanvas.width = screenWidth; // bgcanvas width
 bgcanvas.height = screenHeight; // bgcanvas height
 touchcanvas.width = screenWidth; // touchcanvas width
 touchcanvas.height = screenHeight; // touchcanvas height
+mapcanvas.width = (screenWidth>767)?300:150; // touchcanvas width
+mapcanvas.height = (screenWidth>767)?200:100; // touchcanvas height
 
 disableScrolling("bgcanvas");
 disableScrolling("canvas");
 disableScrolling("touchcanvas");
+disableScrolling("mapcanvas");
 
 ///////////////////
 /* Camera Setup */

@@ -26,9 +26,16 @@ top: 0;
 left: 0;
 }
 
-#touchcanvas {	
+#mapcanvas {	
 position: absolute; 
 z-index: 2;
+bottom: 2%;
+left: 2%;
+}
+
+#touchcanvas {	
+position: absolute; 
+z-index: 3;
 top: 0;
 left: 0;
 }
