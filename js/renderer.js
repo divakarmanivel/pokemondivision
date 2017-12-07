@@ -8,20 +8,23 @@ function renderer() {
 
 	// render the minimap
 	function renderMinimap() {
-		if (!loading) {
-			var startCol = Math.floor((playerXPos/tileSize) - (mapcanvas.width / 5));
-			var endCol = Math.floor((playerXPos/tileSize) + (mapcanvas.width / 5));
-			var startRow = Math.floor((playerYPos/tileSize) - (mapcanvas.height / 5));
-			var endRow = Math.floor((playerYPos/tileSize) + (mapcanvas.height / 5));
-			
-			var pointerWidth = mapcanvas.width / (Math.abs(startCol)+endCol);
-			var pointerHeight = mapcanvas.height / (Math.abs(startRow)+endRow);
+			var startCol = Math.floor(playerXPos/tileSize) - Math.floor(mapcanvas.width / 9);
+			var endCol = Math.floor(playerXPos/tileSize) + Math.floor(mapcanvas.width / 9);
+			var startRow = Math.floor(playerYPos/tileSize) - Math.floor(mapcanvas.height / 9);
+			var endRow = Math.floor(playerYPos/tileSize) + Math.floor(mapcanvas.height / 9);
+
+			var nc = (Math.abs(startCol) + endCol);
+			var nr = (Math.abs(startRow) + endRow);
+			var pc = (Math.abs(startCol) - endCol);
+			var pr = (Math.abs(startRow) - endRow);
+			var pointerWidth = mapcanvas.width / Math.abs(((startCol>0)?pc:nc));
+			var pointerHeight = mapcanvas.height / Math.abs(((startRow>0)?pr:nr));
 			
 			var offsetX = -Math.floor(playerXPos/tileSize) + startCol * pointerWidth;
 			var offsetY = -Math.floor(playerYPos/tileSize) + startRow * pointerHeight;
 			
 			mapcontext.clearRect(0, 0, mapcanvas.width, mapcanvas.height);
-			mapcontext.globalAlpha = 0.3;
+			mapcontext.globalAlpha = 0.5;
 			mapcontext.fillStyle = 'black';
 			mapcontext.fillRect(0, 0, mapcanvas.width, mapcanvas.height);
 
@@ -33,34 +36,21 @@ function renderer() {
 					if (i >= 0 && j >= 0 && i < mapRows && j < mapCols) {
 						var path_tile = path_map[i][j]; //first draw the path layers
 						if (path_tile === 0 && path_tile != null) {
-							mapcontext.fillStyle = 'green';
-							mapcontext.fillRect(y, x, pointerWidth, pointerHeight); //draw grass tile
+							mapcontext.fillStyle = 'green'; //draw grass tile
 						}
 						var obstacle_tile = obstacle_map[i][j]; //second draw the object layers
 						if (obstacle_tile == 1 && obstacle_tile != null) {
-							mapcontext.fillStyle = 'gray';
-							mapcontext.fillRect(y, x, pointerWidth, pointerHeight); //draw bush tile
+							mapcontext.fillStyle = 'gray'; //draw bush tile
 						}
-						var npc_tile = npc_map[i][j]; //lastly draw the npc layers
+						var npc_tile = npc_map[i][j]; //third draw the npc layers
 						if (npc_tile !== 0 && npc_tile != null) {
-							var spriteID = npc_map_data["m:" + 1 + "r:" + i + "c:" + j].value;
-							var sprite = npc_map_data["m:" + 1 + "r:" + i + "c:" + j].frameIndex;
-							if (spriteID >= 2000) {
-								var NPC = NPCDatabase[(npc_tile - 2000)].sprites[sprite];
-								mapcontext.fillStyle = 'brown';
-								mapcontext.fillRect(y, x, pointerWidth, pointerHeight); //draw npc tile
-							}
+								mapcontext.fillStyle = 'brown'; //draw npc tile
 						}
-						var pokemon_tile = pokemon_map[i][j]; //lastly draw the npc layers
+						var pokemon_tile = pokemon_map[i][j]; //lastly draw the pokemon layers
 						if (pokemon_tile !== 0 && pokemon_tile != null) {
-							var pokemonID = pokemon_map_data["m:" + 1 + "r:" + i + "c:" + j].value;
-							var pokemonFrame = pokemon_map_data["m:" + 1 + "r:" + i + "c:" + j].frameIndex;
-							if (pokemonID < 2000) {
-								var pokemon = pokemonDatabase[pokemon_tile].sprites[pokemonFrame];
-								mapcontext.fillStyle = 'yellow';
-								mapcontext.fillRect(y, x, pointerWidth, pointerHeight); //draw pokemon tile
-							}
+								mapcontext.fillStyle = 'yellow'; //draw pokemon tile
 						}
+						mapcontext.fillRect(y, x, pointerWidth, pointerHeight); //draw on minimap
 					}
 				}
 			}
@@ -68,8 +58,8 @@ function renderer() {
 			mapcontext.fillRect(Math.floor(mapcanvas.width / 2), Math.floor(mapcanvas.height / 2), pointerWidth, pointerHeight); //draw player tile
 
 			mapcontext.globalAlpha = 1.0;
-		}
 	}
+	
 	// render the level
 	function renderLevel() {
 		if (!loading) {
@@ -97,7 +87,7 @@ function renderer() {
 						if (obstacle_tile == 1 && obstacle_tile != null) {
 							drawTile(outdoorTiles, 120, 1, 16, 16, y, x); //draw bush tile
 						}
-						var npc_tile = npc_map[i][j]; //lastly draw the npc layers
+						var npc_tile = npc_map[i][j]; //third draw the npc layers
 						if (npc_tile !== 0 && npc_tile != null) {
 							var spriteID = npc_map_data["m:" + 1 + "r:" + i + "c:" + j].value;
 							var sprite = npc_map_data["m:" + 1 + "r:" + i + "c:" + j].frameIndex;
@@ -106,7 +96,7 @@ function renderer() {
 								drawTile(NPC, 0, 0, tileSize, tileSize, y, x); //draw npc tile 
 							}
 						}
-						var pokemon_tile = pokemon_map[i][j]; //lastly draw the npc layers
+						var pokemon_tile = pokemon_map[i][j]; //lastly draw the pokemon layers
 						if (pokemon_tile !== 0 && pokemon_tile != null) {
 							var pokemonID = pokemon_map_data["m:" + 1 + "r:" + i + "c:" + j].value;
 							var pokemonFrame = pokemon_map_data["m:" + 1 + "r:" + i + "c:" + j].frameIndex;
@@ -201,8 +191,14 @@ function renderer() {
 		window.requestAnimationFrame(updateGame);
 		// rendering level
 		renderLevel();
+	}
+
+	// update the minimap
+	function updateMinimap() {
+		window.requestAnimationFrame(updateMinimap);
 		// rendering minimap
 		renderMinimap();
 	}
 	updateGame();
+	updateMinimap();
 }
