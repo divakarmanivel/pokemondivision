@@ -5,13 +5,17 @@
 Pokémon Division is an online MMORPG based on the famous Pokémon gameboy games. It is designed to run on all devices.
 This game is a work in progress with lots of improvements to be done.
 
-Currently I am working on:
+In Progress Tasks:
 * Adding more pokemon to the roster - *In Progress*
-* Adding npcs for the player to interact - *In Progress*
+* Make interactable npcs - *In Progress*
 * Add a rich map generator to the game for extensive gameplay - *In Progress*
-* Add proper sprites for the character and surroundings - *Completed*
 * Add a storyline to kickstart the game - *In Progress*
 * Add a Pokédex with updated Pokémon data - *In Progress*
+
+Completed Tasks:
+* Add a minimap - *Completed*
+* Add proper sprites for the character and surroundings - *Completed*
+* Adding npcs - *Completed*
 
 # Gameplay
 
@@ -30,7 +34,7 @@ Button B - k\
 START - enter key\
 SELECT - shift key
 
-When playing on a touch enabled device, hold down on the screen to enable to touch ontroller and drag to move in the desired direction.
+When playing on a touch enabled device, hold down on the screen to enable to touch controller and drag to move in the desired direction.
 
 For a live demo visit [Pokémon Division](https://divakarmanivel.github.io/pokemondivision/) on desktop or mobile.
 
