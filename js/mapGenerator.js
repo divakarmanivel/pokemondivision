@@ -136,9 +136,9 @@ function setMovingPokemon(row, col, value)  {
 }
 
 function updateNPCMapData() {
+	if(rotating_npc_keys.length!==0){
 	var keyat = rotating_npc_keys.length * Math.random() << 0;
 	var npc;
-	if (keyat !== undefined && keyat !== 0) {
 		npc = rotating_npc_data[rotating_npc_keys[keyat]];
 		if (npc.map_num !== undefined && npc.row !== undefined && npc.col !== undefined && npc.value !== undefined) {
 			var rotating_npc = [];
@@ -153,8 +153,8 @@ function updateNPCMapData() {
 		}
 	}
 
+	if(moving_npc_keys.length!==0){
 	keyat = moving_npc_keys.length * Math.random() << 0;
-	if (keyat !== undefined && keyat !== 0) {
 		npc = moving_npc_data[moving_npc_keys[keyat]];
 		if (npc.map_num !== undefined && npc.row !== undefined && npc.col !== undefined && npc.value !== undefined) {
 			var row = Math.floor(Math.random() * 2);
@@ -194,13 +194,13 @@ function updateNPCMapData() {
 				npc_map_data.splice(oldkey, 1);
 			}
 		}
-	}
+}
 }
 
 function updatePokemonMapData() {
+	if(rotating_pokemon_keys.length!==0){
 	var keyat = rotating_pokemon_keys.length * Math.random() << 0;
 	var pokemon;
-	if (keyat !== undefined && keyat !== 0) {
 		pokemon = rotating_pokemon_data[rotating_pokemon_keys[keyat]];
 		if (pokemon.map_num !== undefined && pokemon.row !== undefined && pokemon.col !== undefined && pokemon.value !== undefined) {
 			var rotating_pokemon = [];
@@ -214,9 +214,9 @@ function updatePokemonMapData() {
 			pokemon_map_data[rotating_pokemon_keys[keyat]] = rotating_pokemon;
 		}
 	}
-
+	
+	if(moving_pokemon_keys.length!==0){
 	keyat = moving_pokemon_keys.length * Math.random() << 0;
-	if (keyat !== undefined && keyat !== 0) {
 		pokemon = moving_pokemon_data[moving_pokemon_keys[keyat]];
 		if (pokemon.map_num !== undefined && pokemon.row !== undefined && pokemon.col !== undefined && pokemon.value !== undefined) {
 			var row = Math.floor(Math.random() * 2);
@@ -256,7 +256,7 @@ function updatePokemonMapData() {
 				pokemon_map_data.splice(oldkey, 1);
 			}
 		}
-	}
+}
 }
 
 
