@@ -5,6 +5,7 @@
 var loading = true;
 var loadingNPC = true;
 var loadingPokemon = true;
+var showMap = true;
 
 // global variables to calculate movement
 var difX = 0;
@@ -49,8 +50,10 @@ var canvas = document.getElementById("canvas"); // the canvas where game will be
 var context = canvas.getContext("2d"); // canvas context
 var touchcanvas = document.getElementById("touchcanvas"); // the touch canvas where joystick will be drawn
 var touchcontext = touchcanvas.getContext("2d"); // touch canvas context
-var mapcanvas = document.getElementById("mapcanvas"); // the touch canvas where joystick will be drawn
-var mapcontext = mapcanvas.getContext("2d"); // touch canvas context
+var mapcanvas = document.getElementById("mapcanvas"); // the map canvas where joystick will be drawn
+var mapcontext = mapcanvas.getContext("2d"); // map canvas context
+var menucanvas = document.getElementById("menucanvas"); // the menu canvas where menu will be drawn
+var menucontext = canvas.getContext("2d"); // menu canvas context
 
 var screenWidth = window.innerWidth || screen.width; // screen width
 var screenHeight = window.innerHeight || screen.height; // screen height
@@ -60,8 +63,10 @@ bgcanvas.width = screenWidth; // bgcanvas width
 bgcanvas.height = screenHeight; // bgcanvas height
 touchcanvas.width = screenWidth; // touchcanvas width
 touchcanvas.height = screenHeight; // touchcanvas height
-mapcanvas.width = (screenWidth>767)?300:150; // touchcanvas width
-mapcanvas.height = (screenWidth>767)?200:100; // touchcanvas height
+mapcanvas.width = (screenWidth>767)?300:150; // mapcanvas width
+mapcanvas.height = (screenWidth>767)?200:100; // mapcanvas height
+menucanvas.width = (screenWidth>767)?screenWidth/3:screenWidth/1.5; // menucanvas width
+menucanvas.height = screenHeight; // menucanvas height
 
 disableScrolling("bgcanvas");
 disableScrolling("canvas");

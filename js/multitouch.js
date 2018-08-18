@@ -33,7 +33,13 @@ function multiTouch() {
 			startTouchY >= 10 &&
 			startTouchY <= (10 + controls_start.height)) {
 			console.log("start");
+			if(btn_start == 0){
 			btn_start = 1;
+			showMap = false;
+			} else {
+				btn_start = 0;
+				showMap = true;
+			}
 		} else if (startTouchX >= touchcanvas.width - controls_select.width - 10 &&
 			startTouchX <= (touchcanvas.width - controls_select.width - 10 + controls_select.width) &&
 			startTouchY >= 10 &&
@@ -53,7 +59,6 @@ function multiTouch() {
 		sY = 0;
 		btn_a = 0;
 		btn_b = 0;
-		btn_start = 0;
 		btn_select = 0;
 		return;
 	}
@@ -96,7 +101,13 @@ function multiTouch() {
 			startTouchY >= 10 &&
 			startTouchY <= (10 + controls_start.height)) {
 			console.log("start");
+			if(btn_start == 0){
 			btn_start = 1;
+			showMap = false;
+			} else {
+				btn_start = 0;
+				showMap = true;
+			}
 		} else if (startTouchX >= touchcanvas.width - controls_select.width - 10 &&
 			startTouchX <= (touchcanvas.width - controls_select.width - 10 + controls_select.width) &&
 			startTouchY >= 10 &&
@@ -129,7 +140,6 @@ function multiTouch() {
 		sY = 0;
 		btn_a = 0;
 		btn_b = 0;
-		btn_start = 0;
 		btn_select = 0;
 		return;
 	}
@@ -297,7 +307,13 @@ function multiTouch() {
 				break;
 			case 13:
 				console.log("start");
+				if(btn_start == 0){
 				btn_start = 1;
+				showMap = false;
+				} else {
+					btn_start = 0;
+					showMap = true;
+				}
 				break;
 		}
 	}, false);
@@ -338,7 +354,6 @@ function multiTouch() {
 				btn_select = 0;
 				break;
 			case 13:
-				btn_start = 0;
 				break;
 		}
 	}, false);

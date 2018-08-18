@@ -112,7 +112,21 @@ function renderer() {
 			}
 			// draw player tile
 			drawTile(charTiles, frameIndex * 32, characterRow * 32, 32, 32, playerCol * tileSize, playerRow * tileSize);
+			
+			if(btn_start){
+				drawMenu();
+			}
 		}
+	}
+
+	function drawMenu(){
+		menucontext.clearRect(0, 0, menucanvas.width, menucanvas.height);
+		menucontext.fillStyle="#383838";
+		menucontext.fillRect(0, 0, menucanvas.width, menucanvas.height);
+		menucontext.fillStyle="#fff";
+		menucontext.fillRect(10, controls_start.height + 20, menucanvas.width - 20, 50);
+		menucontext.fillRect(10, controls_start.height + 80, menucanvas.width - 20, 50);
+		menucontext.fillRect(10, controls_start.height + 140, menucanvas.width - 20, 50);
 	}
 
 	function drawTile(tile, sourceX, sourceY, sWidth, sHeight, destinationX, destinationY) {
