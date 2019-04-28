@@ -5,6 +5,7 @@
 var loading = true;
 var loadingNPC = true;
 var loadingPokemon = true;
+var loadingEmotions = true;
 var showMap = true;
 
 // global variables to calculate movement
@@ -22,7 +23,7 @@ var btn_select;
 /* Level Setup */
 ////////////////
 
-var maps = initMap(1, 100, 100);
+var maps = initMap(100, 100);
 var path_map = maps.path_map;
 var obstacle_map = maps.obstacle_map;
 var npc_map = maps.npc_map;
@@ -33,9 +34,9 @@ var tileSize = 32; // tile size, in pixels
 setBorders();
 setMovingPokemon(2, 2, 2);
 setMovingPokemon(18, 5, 30);
-setRotatingPokemon(2, 10, 16);
+setRotatingPokemon(1, 10, 16, "Welcome!");
 setRotatingPokemon(15, 14, 8);
-setMovingNPC(4, 6, 2000);
+setMovingNPC(4, 6, 2000, "I can talk to you!");
 setMovingNPC(6, 9, 2000);
 setRotatingNPC(14, 2, 2000);
 setRotatingNPC(9, 6, 2000);
@@ -241,12 +242,48 @@ function loadNPCDatabase() {
 	NPCTileSet.src = 'images/npc_overworld.png';
 }
 
+/////////////////////////////
+/* Emotions database setup */
+///////////////////////////
+
+loadEmotionsDatabase();
+var EmotionsTiles = []; // Collection of all NPC data stores as database
+function loadEmotionsDatabase() {
+	var EmotionsCanvas = document.createElement('canvas');
+	var EmotionsContext = EmotionsCanvas.getContext('2d');
+	EmotionsCanvas.height = tileSize;
+	EmotionsCanvas.width = tileSize;
+	var EmotionsTileSet = new Image();
+	EmotionsTileSet.onload = function() {
+		for (var i = 0; i < 3; i++) {
+			for (var j = 0; j < 8; j++) {
+					var size = 17.5;
+					EmotionsContext.drawImage(
+						EmotionsTileSet,
+						(j * size) - 0.5,
+						(i * size) + 2,
+						size,
+						size,
+						0,
+						0,
+						tileSize,
+						tileSize);
+					EmotionsTiles.push(cloneCanvas(EmotionsCanvas));
+					EmotionsContext.clearRect(0, 0, EmotionsCanvas.width, EmotionsCanvas.height);
+			}
+		}
+		loadingEmotions = false;
+		checkRender();
+	}
+	EmotionsTileSet.src = 'images/emotions.png';
+}
+
 ///////////////////////
 /* Helper functions */
 /////////////////////
 
 function checkRender() {
-	if (loadingPokemon == false && loadingNPC == false) {
+	if (loadingPokemon == false && loadingNPC == false && loadingEmotions == false) {
 		loading = false;
 	}
 }
