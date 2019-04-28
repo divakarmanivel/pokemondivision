@@ -1,4 +1,9 @@
 function multiTouch() {
+	var mouse;
+	var startTouchX;
+	var startTouchY;
+	var touches = [];
+
 	//touch listeners
 	document.addEventListener('touchstart', process_touchstart, false);
 	document.addEventListener('touchmove', process_touchmove, false);
@@ -8,47 +13,113 @@ function multiTouch() {
 	document.addEventListener("mousemove", process_mousemove, false);
 	document.addEventListener("mouseup", process_mouseend, false);
 
-	var mouse;
-	var startTouchX;
-	var startTouchY;
-	var touches = [];
+	// keyboard listeners
+	document.addEventListener("keydown", function (e) {
+		switch (e.keyCode) {
+			case 65: // A
+				console.log("left");
+				sX = -1;
+				break;
+			case 87: // W
+				console.log("up");
+				sY = -1;
+				break;
+			case 68: // D
+				console.log("right");
+				sX = 1;
+				break;
+			case 83: // S
+				console.log("down");
+				sY = 1;
+				break;
+			case 37: // D-PAD LEFT
+				console.log("left");
+				sX = -1;
+				break;
+			case 38: // D-PAD UP
+				console.log("up");
+				sY = -1;
+				break;
+			case 39: // D-PAD RIGHT
+				console.log("right");
+				sX = 1;
+				break;
+			case 40: // D-PAD DOWN
+				console.log("down");
+				sY = 1;
+				break;
+			case 73: // I
+				console.log("a");
+				btn_a = 1;
+				break;
+			case 74: // J
+				console.log("b");
+				btn_b = 1;
+				break;
+			case 16: // SHIFT
+				console.log("select");
+				btn_select = 1;
+				break;
+			case 13: // ENTER
+				console.log("start");
+				if (btn_start == 0) {
+					btn_start = 1;
+					showMap = false;
+				} else {
+					btn_start = 0;
+					showMap = true;
+				}
+				break;
+		}
+	}, false);
 
+	document.addEventListener("keyup", function (e) {
+		switch (e.keyCode) {
+			case 65:
+				sX = 0;
+				break;
+			case 87:
+				sY = 0;
+				break;
+			case 68:
+				sX = 0;
+				break;
+			case 83:
+				sY = 0;
+				break;
+			case 37:
+				sX = 0;
+				break;
+			case 38:
+				sY = 0;
+				break;
+			case 39:
+				sX = 0;
+				break;
+			case 40:
+				sY = 0;
+				break;
+			case 73:
+				btn_a = 0;
+				break;
+			case 74:
+				btn_b = 0;
+				break;
+			case 16:
+				btn_select = 0;
+				break;
+			case 13:
+				break;
+		}
+	}, false);
+
+	// process touch inputs
 	function process_touchstart(ev) {
 		startTouchX = ev.changedTouches[0].clientX;
 		startTouchY = ev.changedTouches[0].clientY;
-		if (startTouchX >= (touchcanvas.width - controls_a.width * 2) &&
-			startTouchX <= (touchcanvas.width - controls_a.width * 2 + controls_a.width) &&
-			startTouchY >= (touchcanvas.height - controls_a.height - 10) &&
-			startTouchY <= (touchcanvas.height - controls_a.height - 10 + controls_a.height)) {
-			console.log("a");
-			btn_a = 1;
-		} else if (startTouchX >= (touchcanvas.width - controls_b.width - 10) &&
-			startTouchX <= (touchcanvas.width - controls_b.width - 10 + controls_b.width) &&
-			startTouchY >= (touchcanvas.height - controls_b.height * 2) &&
-			startTouchY <= (touchcanvas.height - controls_b.height * 2 + controls_b.height)) {
-			console.log("b");
-			btn_b = 1;
-		} else if (startTouchX >= 10 &&
-			startTouchX <= (10 + controls_start.width) &&
-			startTouchY >= 10 &&
-			startTouchY <= (10 + controls_start.height)) {
-			console.log("start");
-			if(btn_start == 0){
-			btn_start = 1;
-			showMap = false;
-			} else {
-				btn_start = 0;
-				showMap = true;
-			}
-		} else if (startTouchX >= touchcanvas.width - controls_select.width - 10 &&
-			startTouchX <= (touchcanvas.width - controls_select.width - 10 + controls_select.width) &&
-			startTouchY >= 10 &&
-			startTouchY <= (10 + controls_select.height)) {
-			console.log("select");
-			btn_select = 1;
-		} else {
+		handle_input(startTouchX, startTouchY, function () {
 			touches = ev.touches;
-		}
+		});
 		return;
 	}
 
@@ -81,54 +152,13 @@ function multiTouch() {
 		return;
 	}
 
+	// process mouse inputs
 	function process_mousestart(ev) {
 		startTouchX = ev.clientX;
 		startTouchY = ev.clientY;
-		if (startTouchX >= (touchcanvas.width - controls_a.width * 2) &&
-			startTouchX <= (touchcanvas.width - controls_a.width * 2 + controls_a.width) &&
-			startTouchY >= (touchcanvas.height - controls_a.height - 10) &&
-			startTouchY <= (touchcanvas.height - controls_a.height - 10 + controls_a.height)) {
-			console.log("a");
-			btn_a = 1;
-		} else if (startTouchX >= (touchcanvas.width - controls_b.width - 10) &&
-			startTouchX <= (touchcanvas.width - controls_b.width - 10 + controls_b.width) &&
-			startTouchY >= (touchcanvas.height - controls_b.height * 2) &&
-			startTouchY <= (touchcanvas.height - controls_b.height * 2 + controls_b.height)) {
-			console.log("b");
-			btn_b = 1;
-		} else if (startTouchX >= 10 &&
-			startTouchX <= (10 + controls_start.width) &&
-			startTouchY >= 10 &&
-			startTouchY <= (10 + controls_start.height)) {
-			console.log("start");
-			if(btn_start == 0){
-			btn_start = 1;
-			showMap = false;
-			} else {
-				btn_start = 0;
-				showMap = true;
-			}
-		} else if (startTouchX >= touchcanvas.width - controls_select.width - 10 &&
-			startTouchX <= (touchcanvas.width - controls_select.width - 10 + controls_select.width) &&
-			startTouchY >= 10 &&
-			startTouchY <= (10 + controls_select.height)) {
-			console.log("select");
-			btn_select = 1;
-		} else {
+		handle_input(startTouchX, startTouchY, function () {
 			mouse = true;
-		}
-		return;
-	}
-
-	function process_mousemove(ev) {
-		ev.preventDefault();
-		if (mouse == true) {
-			touches = [];
-			var mouses = [];
-			mouses.clientX = ev.clientX;
-			mouses.clientY = ev.clientY;
-			touches.push(mouses);
-		}
+		});
 		return;
 	}
 
@@ -144,6 +174,19 @@ function multiTouch() {
 		return;
 	}
 
+	function process_mousemove(ev) {
+		ev.preventDefault();
+		if (mouse == true) {
+			touches = [];
+			var mouses = [];
+			mouses.clientX = ev.clientX;
+			mouses.clientY = ev.clientY;
+			touches.push(mouses);
+		}
+		return;
+	}
+
+	// render the touch panel
 	function updateTouch() {
 		touchcontext.clearRect(0, 0, touchcanvas.width, touchcanvas.height);
 
@@ -256,105 +299,50 @@ function multiTouch() {
 		}
 		window.requestAnimationFrame(updateTouch);
 	}
-	updateTouch();
 
-	// keyboard listeners
-	document.addEventListener("keydown", function (e) {
-		switch (e.keyCode) {
-			case 65:
-				console.log("left");
-				sX = -1;
-				break;
-			case 87:
-				console.log("up");
-				sY = -1;
-				break;
-			case 68:
-				console.log("right");
-				sX = 1;
-				break;
-			case 83:
-				console.log("down");
-				sY = 1;
-				break;
-			case 37:
-				console.log("left");
-				sX = -1;
-				break;
-			case 38:
-				console.log("up");
-				sY = -1;
-				break;
-			case 39:
-				console.log("right");
-				sX = 1;
-				break;
-			case 40:
-				console.log("down");
-				sY = 1;
-				break;
-			case 73:
-				console.log("a");
-				btn_a = 1;
-				break;
-			case 74:
-				console.log("b");
-				btn_b = 1;
-				break;
-			case 16:
-				console.log("select");
-				btn_select = 1;
-				break;
-			case 13:
-				console.log("start");
-				if(btn_start == 0){
+	// handle inputs
+	function handle_input(startTouchX, startTouchY, handle_default) {
+		if (startTouchX >= (touchcanvas.width - controls_a.width * 2) &&
+			startTouchX <= (touchcanvas.width - controls_a.width * 2 + controls_a.width) &&
+			startTouchY >= (touchcanvas.height - controls_a.height - 10) &&
+			startTouchY <= (touchcanvas.height - controls_a.height - 10 + controls_a.height)) {
+			console.log("a");
+			btn_a = 1;
+		} else if (startTouchX >= (touchcanvas.width - controls_b.width - 10) &&
+			startTouchX <= (touchcanvas.width - controls_b.width - 10 + controls_b.width) &&
+			startTouchY >= (touchcanvas.height - controls_b.height * 2) &&
+			startTouchY <= (touchcanvas.height - controls_b.height * 2 + controls_b.height)) {
+			console.log("b");
+			btn_b = 1;
+		} else if (startTouchX >= 10 &&
+			startTouchX <= (10 + controls_start.width) &&
+			startTouchY >= 10 &&
+			startTouchY <= (10 + controls_start.height)) {
+			console.log("start");
+			if (btn_start == 0) {
 				btn_start = 1;
 				showMap = false;
-				} else {
-					btn_start = 0;
-					showMap = true;
-				}
-				break;
+			} else {
+				btn_start = 0;
+				showMap = true;
+			}
+		} else if (startTouchX >= touchcanvas.width - controls_select.width - 10 &&
+			startTouchX <= (touchcanvas.width - controls_select.width - 10 + controls_select.width) &&
+			startTouchY >= 10 &&
+			startTouchY <= (10 + controls_select.height)) {
+			console.log("select");
+			btn_select = 1;
+		} else {
+			handle_default();
 		}
-	}, false);
+	}
+	updateTouch();
+}
 
-	document.addEventListener("keyup", function (e) {
-		switch (e.keyCode) {
-			case 65:
-				sX = 0;
-				break;
-			case 87:
-				sY = 0;
-				break;
-			case 68:
-				sX = 0;
-				break;
-			case 83:
-				sY = 0;
-				break;
-			case 37:
-				sX = 0;
-				break;
-			case 38:
-				sY = 0;
-				break;
-			case 39:
-				sX = 0;
-				break;
-			case 40:
-				sY = 0;
-				break;
-			case 73:
-				btn_a = 0;
-				break;
-			case 74:
-				btn_b = 0;
-				break;
-			case 16:
-				btn_select = 0;
-				break;
-			case 13:
-				break;
-		}
-	}, false);
+// reset all inputs
+function reset_inputs() {
+	btn_a = 0;
+	btn_b = 0;
+	btn_start = 0;
+	btn_select = 0;
 }

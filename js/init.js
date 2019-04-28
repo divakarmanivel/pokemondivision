@@ -64,9 +64,9 @@ bgcanvas.width = screenWidth; // bgcanvas width
 bgcanvas.height = screenHeight; // bgcanvas height
 touchcanvas.width = screenWidth; // touchcanvas width
 touchcanvas.height = screenHeight; // touchcanvas height
-mapcanvas.width = (screenWidth>767)?300:150; // mapcanvas width
-mapcanvas.height = (screenWidth>767)?200:100; // mapcanvas height
-menucanvas.width = (screenWidth>767)?screenWidth/3:screenWidth/1.5; // menucanvas width
+mapcanvas.width = (screenWidth > 767) ? 300 : 150; // mapcanvas width
+mapcanvas.height = (screenWidth > 767) ? 200 : 100; // mapcanvas height
+menucanvas.width = (screenWidth > 767) ? screenWidth / 3 : screenWidth / 1.5; // menucanvas width
 menucanvas.height = screenHeight; // menucanvas height
 
 disableScrolling("bgcanvas");
@@ -143,7 +143,7 @@ function loadPokemonDatabase() {
 	pokeCanvas.height = tileSize;
 	pokeCanvas.width = tileSize;
 	var pokemonTileSet = new Image();
-	pokemonTileSet.onload = function() {
+	pokemonTileSet.onload = function () {
 		for (var i = 1; i < pokemon_data.length; i++) {
 			pokemonData = []; // Reset as we are obtaining data for a new Pokemon
 			pokemonTiles = [];
@@ -199,19 +199,10 @@ function loadNPCDatabase() {
 	NPCCanvas.height = tileSize;
 	NPCCanvas.width = tileSize;
 	var NPCTileSet = new Image();
-	NPCTileSet.onload = function() {
+	NPCTileSet.onload = function () {
 		for (var i = 0; i < 1; i++) {
 			NPCData = []; // Reset as we are obtaining data for a new NPC
 			NPCTiles = [];
-			/*
-			var NPC = NPC_data[i];
-			NPCData.generation = parseInt(NPC.A);
-			NPCData.id = parseInt(NPC.B);
-			NPCData.name = NPC.C;
-			NPCData.primaryType = NPC.D;
-			NPCData.secondaryType = NPC.E;
-			NPCData.evolutionLevel = parseInt(NPC.F);
-			*/
 			for (var j = 0; j < 3; j++) {
 				for (var k = 0; k < 2; k++) {
 					var xPos = 0;
@@ -254,22 +245,22 @@ function loadEmotionsDatabase() {
 	EmotionsCanvas.height = tileSize;
 	EmotionsCanvas.width = tileSize;
 	var EmotionsTileSet = new Image();
-	EmotionsTileSet.onload = function() {
+	EmotionsTileSet.onload = function () {
 		for (var i = 0; i < 3; i++) {
 			for (var j = 0; j < 8; j++) {
-					var size = 17.5;
-					EmotionsContext.drawImage(
-						EmotionsTileSet,
-						(j * size) - 0.5,
-						(i * size) + 2,
-						size,
-						size,
-						0,
-						0,
-						tileSize,
-						tileSize);
-					EmotionsTiles.push(cloneCanvas(EmotionsCanvas));
-					EmotionsContext.clearRect(0, 0, EmotionsCanvas.width, EmotionsCanvas.height);
+				var size = 17.5;
+				EmotionsContext.drawImage(
+					EmotionsTileSet,
+					(j * size) - 0.5,
+					(i * size) + 2,
+					size,
+					size,
+					0,
+					0,
+					tileSize,
+					tileSize);
+				EmotionsTiles.push(cloneCanvas(EmotionsCanvas));
+				EmotionsContext.clearRect(0, 0, EmotionsCanvas.width, EmotionsCanvas.height);
 			}
 		}
 		loadingEmotions = false;
@@ -318,10 +309,10 @@ function flipCanvas(oldCanvas) {
 }
 
 function disableScrolling(scrollCanvas) {
-	document.getElementById(scrollCanvas).onwheel = function(event) {
+	document.getElementById(scrollCanvas).onwheel = function (event) {
 		event.preventDefault();
 	};
-	document.getElementById(scrollCanvas).onmousewheel = function(event) {
+	document.getElementById(scrollCanvas).onmousewheel = function (event) {
 		event.preventDefault();
 	};
 }

@@ -1,8 +1,3 @@
 /*	main.js file	*/
-
-(function () {
-
-    multiTouch();
-    renderer();
-
-})();
+multiTouch();
+renderer();

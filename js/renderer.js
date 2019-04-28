@@ -161,20 +161,26 @@ function renderer() {
 	// update the game variables with this function
 	function updateGame() {
 		// update any movements
+		var playerCol = Math.round(playerXPos / tileSize);
+		var playerRow = Math.round(playerYPos / tileSize);
+
+		// select character row
 		if (sX !== 0 || sY !== 0) {
 			if (sX > 0) {
-				characterRow = 3;
+				characterRow = 3; // right
 			} else if (sX < 0) {
-				characterRow = 2;
-			} else if (sY < 0) {
-				characterRow = 0;
+				characterRow = 2; // left
 			} else if (sY > 0) {
-				characterRow = 1;
+				characterRow = 1; // down
+			} else if (sY < 0) {
+				characterRow = 0; //up
 			} else {
+				// default down
 				characterRow = 1;
 				frameIndex = 0;
 			}
 
+			// select character frame
 			tickCount += 1;
 			if (tickCount > ticksPerFrame) {
 				tickCount = 0;
@@ -184,7 +190,9 @@ function renderer() {
 					frameIndex = 0;
 				}
 			}
-			var collision = collisionCheck(Math.round(playerXPos / tileSize), Math.round(playerYPos / tileSize));
+
+			// check for collisions and update if no collision detected
+			var collision = collisionCheck(playerCol, playerRow);
 			if (!collision) {
 				difX = difX + sX;
 				difY = difY + sY;
@@ -217,10 +225,34 @@ function renderer() {
 		} else {
 			frameIndex = 0;
 		}
+
+		// draw interactions based on character position
+		if (btn_a == 1) {
+			var interactiveRow = playerRow;
+			var interactiveCol = playerCol;
+			if (characterRow == 3) {
+				interactiveCol = interactiveCol + 1;
+			} else if (characterRow == 2) {
+				interactiveCol = interactiveCol - 1;
+			} else if (characterRow == 1) {
+				interactiveRow = interactiveRow + 1;
+			} else if (characterRow == 0) {
+				interactiveRow = interactiveRow - 1;
+			}
+			var npc = npc_map_data["m:" + map_number + "r:" + interactiveRow + "c:" + interactiveCol];
+			var pokemon = pokemon_map_data["m:" + map_number + "r:" + interactiveRow + "c:" + interactiveCol];
+			if (pokemon != null && pokemon != undefined) {
+				alert(pokemon.interaction);
+			} else if (npc != null && npc != undefined) {
+				alert(npc.interaction);
+			}
+		}
 		// update the game
 		window.requestAnimationFrame(updateGame);
 		// rendering level
 		renderLevel();
+		// reset all inputs
+		reset_inputs();
 	}
 
 	// update the minimap

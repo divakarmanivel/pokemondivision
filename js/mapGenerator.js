@@ -12,6 +12,7 @@ var moving_pokemon_keys = [];
 var rotating_pokemon_data = [];
 var rotating_pokemon_keys = [];
 
+// initialize a new map
 function initMap(numrows, numcols) {
 	map_number = map_number + 1;
 	var new_path_map = [];
@@ -37,6 +38,7 @@ function initMap(numrows, numcols) {
 	};
 }
 
+// set the default borders for a map
 function setBorders() {
 	for (var i = 0; i < path_map.length; i++) {
 		for (var j = 0; j < path_map[1].length; j++) {
@@ -47,14 +49,17 @@ function setBorders() {
 	}
 }
 
+// set a path element - player can navigate on paths
 function setPath(row, col, value) {
 	path_map[row][col] = value;
 }
 
+// set an object element - player cannot interact with objects
 function setObject(row, col, value) {
 	obstacle_map[row][col] = value;
 }
 
+// set a static NPC
 function setNPC(row, col, value, interaction = null) {
 	var key = "m:" + map_number + "r:" + row + "c:" + col;
 	npc_map[row][col] = value;
@@ -81,6 +86,7 @@ function setPokemon(row, col, value, interaction = null) {
 	pokemon_map_data[key] = pokemon;
 }
 
+// set a rotating NPC
 function setRotatingNPC(row, col, value, interaction = null) {
 	var key = "m:" + map_number + "r:" + row + "c:" + col;
 	npc_map[row][col] = value;
@@ -111,6 +117,7 @@ function setRotatingPokemon(row, col, value, interaction = null) {
 	rotating_pokemon_keys.push(key);
 }
 
+// set a moving NPC
 function setMovingNPC(row, col, value, interaction = null) {
 	var key = "m:" + map_number + "r:" + row + "c:" + col;
 	npc_map[row][col] = value;
@@ -141,10 +148,12 @@ function setMovingPokemon(row, col, value, interaction = null) {
 	moving_pokemon_keys.push(key);
 }
 
+// update NPC map
 function updateNPCMapData() {
+	var keyat;
+	var npc;
 	if (rotating_npc_keys.length !== 0) {
-		var keyat = rotating_npc_keys.length * Math.random() << 0;
-		var npc;
+		keyat = rotating_npc_keys.length * Math.random() << 0;
 		npc = rotating_npc_data[rotating_npc_keys[keyat]];
 		if (npc.map_num !== undefined && npc.row !== undefined && npc.col !== undefined && npc.value !== undefined) {
 			var rotating_npc = [];
@@ -198,17 +207,20 @@ function updateNPCMapData() {
 				npc_map[newrow][newcol] = npc.value;
 				moving_npc_data.splice(keyat, 1);
 				moving_npc_keys.splice(keyat, 1);
-				var oldkey = npc_map_data.indexOf(npc);
-				npc_map_data.splice(oldkey, 1);
+				var oldkey = "m:" + npc.map_num + "r:" + npc.row + "c:" + npc.col;
+				if (npc_map_data.hasOwnProperty(oldkey)) {
+					delete npc_map_data[oldkey];
+				}
 			}
 		}
 	}
 }
 
 function updatePokemonMapData() {
+	var keyat;
+	var pokemon;
 	if (rotating_pokemon_keys.length !== 0) {
-		var keyat = rotating_pokemon_keys.length * Math.random() << 0;
-		var pokemon;
+		keyat = rotating_pokemon_keys.length * Math.random() << 0;
 		pokemon = rotating_pokemon_data[rotating_pokemon_keys[keyat]];
 		if (pokemon.map_num !== undefined && pokemon.row !== undefined && pokemon.col !== undefined && pokemon.value !== undefined) {
 			var rotating_pokemon = [];
@@ -262,13 +274,14 @@ function updatePokemonMapData() {
 				pokemon_map[newrow][newcol] = pokemon.value;
 				moving_pokemon_data.splice(keyat, 1);
 				moving_pokemon_keys.splice(keyat, 1);
-				var oldkey = pokemon_map_data.indexOf(pokemon);
-				pokemon_map_data.splice(oldkey, 1);
+				var oldkey = "m:" + pokemon.map_num + "r:" + pokemon.row + "c:" + pokemon.col;
+				if (pokemon_map_data.hasOwnProperty(oldkey)) {
+					delete pokemon_map_data[oldkey];
+				}
 			}
 		}
 	}
 }
-
 
 setInterval(function () {
 	updateNPCMapData();

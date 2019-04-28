@@ -1,5 +1,5 @@
 function collisionCheck(column, row) {
-	// check for collisions
+	// check for collisions around the player
 	var baseCol = column;
 	var baseRow = row;
 	var left = baseCol - 1;
@@ -21,7 +21,7 @@ function collisionCheck(column, row) {
 }
 
 function collisionCheckNPC(column, row) {
-	// check for collisions
+	// check for collisions around npc
 	var collision = false;
 
 	if (obstacle_map[row][column] !== 0 || npc_map[row][column] !== 0 || pokemon_map[row][column] !== 0 || (column == Math.round(playerXPos / tileSize) && row == Math.round(playerYPos / tileSize))) {
