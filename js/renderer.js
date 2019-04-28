@@ -20,9 +20,6 @@ function renderer() {
 		var pointerWidth = mapcanvas.width / Math.abs(((startCol > 0) ? pc : nc));
 		var pointerHeight = mapcanvas.height / Math.abs(((startRow > 0) ? pr : nr));
 
-		var offsetX = -Math.floor(playerXPos / tileSize) + startCol * pointerWidth;
-		var offsetY = -Math.floor(playerYPos / tileSize) + startRow * pointerHeight;
-
 		mapcontext.clearRect(0, 0, mapcanvas.width, mapcanvas.height);
 		mapcontext.globalAlpha = 0.5;
 		mapcontext.fillStyle = 'black';
@@ -70,6 +67,8 @@ function renderer() {
 
 			var offsetX = -camX + startCol * tileSize;
 			var offsetY = -camY + startRow * tileSize;
+
+			context.save();
 			// clear the canvas
 			context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -79,15 +78,20 @@ function renderer() {
 					var x = (i - startRow) * tileSize - offsetX;
 					var y = (j - startCol) * tileSize - offsetY;
 					if (i >= 0 && j >= 0 && i < mapRows && j < mapCols) {
-						var path_tile = path_map[i][j]; //first draw the path layers
+						//first draw the path layers
+						var path_tile = path_map[i][j];
 						if (path_tile === 0 && path_tile != null && path_tile != undefined) {
-							drawTile(outdoorTiles, 103, 1, 16, 16, y, x); //draw grass tile
+							var grass = OutdoorTiles[6];
+							drawTile(grass, 0, 0, tileSize, tileSize, y, x); //draw grass tile
 						}
-						var obstacle_tile = obstacle_map[i][j]; //second draw the object layers
+						//second draw the object layers
+						var obstacle_tile = obstacle_map[i][j];
 						if (obstacle_tile == 1 && obstacle_tile != null && obstacle_tile != undefined) {
-							drawTile(outdoorTiles, 120, 1, 16, 16, y, x); //draw bush tile
+							var bush = OutdoorTiles[7];
+							drawTile(bush, 0, 0, tileSize, tileSize, y, x); //draw bush tile
 						}
-						var npc_tile = npc_map[i][j]; //third draw the npc layers
+						//third draw the npc layers
+						var npc_tile = npc_map[i][j];
 						if (npc_tile !== 0 && npc_tile != null && npc_tile != undefined) {
 							var spriteID = npc_map_data["m:" + map_number + "r:" + i + "c:" + j].value;
 							var sprite = npc_map_data["m:" + map_number + "r:" + i + "c:" + j].frameIndex;
@@ -98,13 +102,14 @@ function renderer() {
 								if (spriteInteraction != null || spriteInteraction != undefined) {
 									if ((i - 1) >= 0 && i < mapRows) {
 										var dx = ((i - 1) - startRow) * tileSize - offsetX;
-										var emotion = EmotionsTiles[22];
+										var emotion = EmotionsTiles[8];
 										drawTile(emotion, 0, 0, tileSize, tileSize, y, dx); //draw npc interaction
 									}
 								}
 							}
 						}
-						var pokemon_tile = pokemon_map[i][j]; //lastly draw the pokemon layers
+						//fourth draw the pokemon layers
+						var pokemon_tile = pokemon_map[i][j];
 						if (pokemon_tile !== 0 && pokemon_tile != null && pokemon_tile != undefined) {
 							var pokemonID = pokemon_map_data["m:" + map_number + "r:" + i + "c:" + j].value;
 							var pokemonFrame = pokemon_map_data["m:" + map_number + "r:" + i + "c:" + j].frameIndex;
@@ -115,23 +120,25 @@ function renderer() {
 								if (pokemonInteraction != null || pokemonInteraction != undefined) {
 									if ((i - 1) >= 0 && i < mapRows) {
 										var dx = ((i - 1) - startRow) * tileSize - offsetX;
-										var emotion = EmotionsTiles[22];
+										var emotion = EmotionsTiles[8];
 										drawTile(emotion, 0, 0, tileSize, tileSize, y, dx); //draw pokemon interaction
 									}
 								}
 							}
 						}
 					} else {
-						drawTile(outdoorTiles, 1, 1, 16, 16, y, x); //draw sand tile when the view is outside the map
+						var sand = OutdoorTiles[0];
+						drawTile(sand, 0, 0, tileSize, tileSize, y, x); //draw sand tile when the view is outside the map
 					}
 				}
 			}
-			// draw player tile
+			// finally draw player tile
 			drawTile(charTiles, frameIndex * 32, characterRow * 32, 32, 32, playerCol * tileSize, playerRow * tileSize);
-
+			// draw menu
 			if (btn_start) {
 				drawMenu();
 			}
+			context.restore();
 		}
 	}
 
@@ -145,7 +152,7 @@ function renderer() {
 		menucontext.fillRect(10, controls_start.height + 140, menucanvas.width - 20, 50);
 	}
 
-	function drawTile(tile, sourceX, sourceY, sWidth, sHeight, destinationX, destinationY) {
+	function drawTile(tile, sourceX, sourceY, sWidth, sHeight, destinationX, destinationY, light = false) {
 		context.drawImage(
 			tile,
 			sourceX,
@@ -241,9 +248,9 @@ function renderer() {
 			}
 			var npc = npc_map_data["m:" + map_number + "r:" + interactiveRow + "c:" + interactiveCol];
 			var pokemon = pokemon_map_data["m:" + map_number + "r:" + interactiveRow + "c:" + interactiveCol];
-			if (pokemon != null && pokemon != undefined) {
+			if (pokemon != null && pokemon != undefined && pokemon.interaction != null && pokemon.interaction != undefined) {
 				alert(pokemon.interaction);
-			} else if (npc != null && npc != undefined) {
+			} else if (npc != null && npc != undefined && npc.interaction != null && npc.interaction != undefined) {
 				alert(npc.interaction);
 			}
 		}

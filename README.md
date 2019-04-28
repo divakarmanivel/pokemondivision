@@ -42,6 +42,8 @@ For a live demo visit [Pokémon Division](https://divakarmanivel.github.io/pokem
 
 I welcome pull requests from all Pokémon fans and developers alike! Thanks in advance! For more details on how to contribute, visit our [Contribution](CONTRIBUTING.md) page and [Pull Request Template](PULL_REQUEST_TEMPLATE.md) page.
 
+One of the key areas where I need help is with sprites! Please take a look at existing sprites and let me know if you can help.
+
 ## Code of Conduct
 
 Visit our [Code of Conduct](CODE_OF_CONDUCT.md) page for an overview on our ground rules.
@@ -66,7 +68,7 @@ A: Most of the data I had been collecting since my childhood. But some of the mo
 
 Q: Where did you get the Pokémon art?
 
-A: The art used in this development version was obtained from [The Spriters Resource](https://www.spriters-resource.com/) and [OpenGameArt](https://opengameart.org/). I am planning to bring in my own sprites in the near future when I have more time.
+A: The art used in this development version was obtained from [The Spriters Resource](https://www.spriters-resource.com/), [Kenney](https://www.kenney.nl) and [OpenGameArt](https://opengameart.org/). I am planning to bring in my own sprites in the near future when I have more time.
 
 # License
 

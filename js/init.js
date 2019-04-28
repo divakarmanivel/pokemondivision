@@ -5,6 +5,7 @@
 var loading = true;
 var loadingNPC = true;
 var loadingPokemon = true;
+var loadingOutdoor = true;
 var loadingEmotions = true;
 var showMap = true;
 
@@ -122,11 +123,11 @@ controls_start.src = "images/controls_start.png";
 var controls_select = new Image();
 controls_select.src = "images/controls_select.png";
 
-var outdoorTiles = new Image();
-outdoorTiles.src = "images/outdoor.png";
-
 var charTiles = new Image();
 charTiles.src = "images/hero_overworld.png";
+
+var landscapeTiles = new Image();
+landscapeTiles.src = "images/landscapes_sheet.png";
 
 /////////////////////////////
 /* Pokemon database setup */
@@ -205,13 +206,11 @@ function loadNPCDatabase() {
 			NPCTiles = [];
 			for (var j = 0; j < 3; j++) {
 				for (var k = 0; k < 2; k++) {
-					var xPos = 0;
-					var yPos = 0;
 					var size = 32;
 					NPCContext.drawImage(
 						NPCTileSet,
-						xPos + (k * size),
-						yPos + (j * size),
+						(k * size),
+						(j * size),
 						size,
 						size,
 						0,
@@ -234,11 +233,52 @@ function loadNPCDatabase() {
 }
 
 /////////////////////////////
+/* Outdoor database setup */
+///////////////////////////
+
+loadOutdoorDatabase();
+var OutdoorTiles = []; // Collection of all Outdoor data stores as database
+function loadOutdoorDatabase() {
+	var OutdoorCanvas = document.createElement('canvas');
+	var OutdoorContext = OutdoorCanvas.getContext('2d');
+	OutdoorCanvas.height = tileSize;
+	OutdoorCanvas.width = tileSize;
+	var OutdoorTile;
+	var OutdoorTileSet = new Image();
+	OutdoorTileSet.onload = function () {
+		for (var i = 0; i < 46; i++) {
+			for (var j = 0; j < 28; j++) {
+				var size = 17;
+				OutdoorContext.drawImage(
+					OutdoorTileSet,
+					(j * size) + 1,
+					(i * size) + 1,
+					size - 1,
+					size - 1,
+					0,
+					0,
+					tileSize,
+					tileSize);
+				OutdoorTile = cloneCanvas(OutdoorCanvas);
+				// OutdoorTile.sprite = cloneCanvas(OutdoorCanvas);
+				// OutdoorTile.lighter = lighenTile(OutdoorCanvas);
+				// OutdoorTile.darker = darkenTile(OutdoorCanvas);
+				OutdoorTiles.push(OutdoorTile);
+				OutdoorContext.clearRect(0, 0, OutdoorCanvas.width, OutdoorCanvas.height);
+			}
+		}
+		loadingOutdoor = false;
+		checkRender();
+	};
+	OutdoorTileSet.src = 'images/outdoor.png';
+}
+
+/////////////////////////////
 /* Emotions database setup */
 ///////////////////////////
 
 loadEmotionsDatabase();
-var EmotionsTiles = []; // Collection of all NPC data stores as database
+var EmotionsTiles = []; // Collection of all Emotions data stores as database
 function loadEmotionsDatabase() {
 	var EmotionsCanvas = document.createElement('canvas');
 	var EmotionsContext = EmotionsCanvas.getContext('2d');
@@ -247,14 +287,13 @@ function loadEmotionsDatabase() {
 	var EmotionsTileSet = new Image();
 	EmotionsTileSet.onload = function () {
 		for (var i = 0; i < 3; i++) {
-			for (var j = 0; j < 8; j++) {
-				var size = 17.5;
+			for (var j = 0; j < 10; j++) {
 				EmotionsContext.drawImage(
 					EmotionsTileSet,
-					(j * size) - 0.5,
-					(i * size) + 2,
-					size,
-					size,
+					(j * tileSize) - 0.5,
+					(i * tileSize) + 2,
+					tileSize,
+					tileSize,
 					0,
 					0,
 					tileSize,
@@ -265,8 +304,8 @@ function loadEmotionsDatabase() {
 		}
 		loadingEmotions = false;
 		checkRender();
-	}
-	EmotionsTileSet.src = 'images/emotions.png';
+	};
+	EmotionsTileSet.src = 'images/emotions_vector_style.png';
 }
 
 ///////////////////////
@@ -274,7 +313,7 @@ function loadEmotionsDatabase() {
 /////////////////////
 
 function checkRender() {
-	if (loadingPokemon == false && loadingNPC == false && loadingEmotions == false) {
+	if (loadingPokemon == false && loadingNPC == false && loadingOutdoor == false && loadingEmotions == false) {
 		loading = false;
 	}
 }
@@ -306,6 +345,28 @@ function flipCanvas(oldCanvas) {
 	context.drawImage(oldCanvas, 0, 0);
 	//return the new canvas
 	return newCanvas;
+}
+
+function lighenTile(tile, alpha) {
+	var new_tile = cloneCanvas(tile);
+	var new_context = new_tile.getContext('2d');
+	new_context.save();
+	new_context.globalCompositeOperation = "source-atop";
+	new_context.fillStyle = "rgba(255,255,255, " + alpha + ")";
+	new_context.fillRect(0, 0, new_tile.width, new_tile.height);
+	new_context.restore();
+	return new_tile;
+}
+
+function darkenTile(tile, alpha) {
+	var new_tile = cloneCanvas(tile);
+	var new_context = new_tile.getContext('2d');
+	new_context.save();
+	new_context.globalCompositeOperation = "source-atop";
+	new_context.fillStyle = "rgba(0,0,0, " + alpha + ")";
+	new_context.fillRect(0, 0, new_tile.width, new_tile.height);
+	new_context.restore();
+	return new_tile;
 }
 
 function disableScrolling(scrollCanvas) {
