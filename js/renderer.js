@@ -5,7 +5,7 @@ function renderer() {
 	var tickCount = 0;
 	var ticksPerFrame = 0;
 	var numberOfFrames = 3;
-
+	var enableLightRoom = false;
 	// render the minimap
 	function renderMinimap() {
 		var startCol = Math.floor(playerXPos / tileSize) - Math.floor(mapcanvas.width / 9);
@@ -81,13 +81,27 @@ function renderer() {
 						//first draw the path layers
 						var path_tile = path_map[i][j];
 						if (path_tile === 0 && path_tile != null && path_tile != undefined) {
-							var grass = OutdoorTiles[6];
+							var grass;
+							if (!enableLightRoom) {
+								grass = OutdoorTiles[6].sprite;
+							} else if (getLightRoom(j, i) && enableLightRoom) {
+								grass = OutdoorTiles[6].light;
+							} else {
+								grass = OutdoorTiles[6].dark;
+							}
 							drawTile(grass, 0, 0, tileSize, tileSize, y, x); //draw grass tile
 						}
 						//second draw the object layers
 						var obstacle_tile = obstacle_map[i][j];
 						if (obstacle_tile == 1 && obstacle_tile != null && obstacle_tile != undefined) {
-							var bush = OutdoorTiles[7];
+							var bush;
+							if (!enableLightRoom) {
+								bush = OutdoorTiles[7].sprite;
+							} else if (getLightRoom(j, i) && enableLightRoom) {
+								bush = OutdoorTiles[7].sprite;
+							} else {
+								bush = OutdoorTiles[7].dark;
+							}
 							drawTile(bush, 0, 0, tileSize, tileSize, y, x); //draw bush tile
 						}
 						//third draw the npc layers
@@ -127,7 +141,14 @@ function renderer() {
 							}
 						}
 					} else {
-						var sand = OutdoorTiles[0];
+						var sand;
+						if (!enableLightRoom) {
+							sand = OutdoorTiles[0].sprite;
+						} else if (getLightRoom(j, i) && enableLightRoom) {
+							sand = OutdoorTiles[0].sprite;
+						} else {
+							sand = OutdoorTiles[0].dark;
+						}
 						drawTile(sand, 0, 0, tileSize, tileSize, y, x); //draw sand tile when the view is outside the map
 					}
 				}
@@ -268,6 +289,18 @@ function renderer() {
 		// rendering minimap
 		renderMinimap();
 	}
+
+	function getLightRoom(col, row, radius = 4) {
+		var lightRoom;
+		var playerCol = Math.round(playerXPos / tileSize);
+		var playerRow = Math.round(playerYPos / tileSize);
+		if (col > playerCol - radius && col < playerCol + radius && row > playerRow - radius && row < playerRow + radius) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	updateGame();
 	updateMinimap();
 }

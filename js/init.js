@@ -243,11 +243,11 @@ function loadOutdoorDatabase() {
 	var OutdoorContext = OutdoorCanvas.getContext('2d');
 	OutdoorCanvas.height = tileSize;
 	OutdoorCanvas.width = tileSize;
-	var OutdoorTile;
 	var OutdoorTileSet = new Image();
 	OutdoorTileSet.onload = function () {
 		for (var i = 0; i < 46; i++) {
 			for (var j = 0; j < 28; j++) {
+				var OutdoorTile = [];
 				var size = 17;
 				OutdoorContext.drawImage(
 					OutdoorTileSet,
@@ -259,10 +259,9 @@ function loadOutdoorDatabase() {
 					0,
 					tileSize,
 					tileSize);
-				OutdoorTile = cloneCanvas(OutdoorCanvas);
-				// OutdoorTile.sprite = cloneCanvas(OutdoorCanvas);
-				// OutdoorTile.lighter = lighenTile(OutdoorCanvas);
-				// OutdoorTile.darker = darkenTile(OutdoorCanvas);
+				OutdoorTile.sprite = cloneCanvas(OutdoorCanvas);
+				OutdoorTile.light = lightTile(OutdoorCanvas);
+				OutdoorTile.dark = darkTile(OutdoorCanvas);
 				OutdoorTiles.push(OutdoorTile);
 				OutdoorContext.clearRect(0, 0, OutdoorCanvas.width, OutdoorCanvas.height);
 			}
@@ -347,23 +346,23 @@ function flipCanvas(oldCanvas) {
 	return newCanvas;
 }
 
-function lighenTile(tile, alpha) {
+function lightTile(tile, alpha = "0.2") {
 	var new_tile = cloneCanvas(tile);
 	var new_context = new_tile.getContext('2d');
 	new_context.save();
 	new_context.globalCompositeOperation = "source-atop";
-	new_context.fillStyle = "rgba(255,255,255, " + alpha + ")";
+	new_context.fillStyle = "rgba(255 ,255, 255, " + alpha + ")";
 	new_context.fillRect(0, 0, new_tile.width, new_tile.height);
 	new_context.restore();
 	return new_tile;
 }
 
-function darkenTile(tile, alpha) {
+function darkTile(tile, alpha = "0.5") {
 	var new_tile = cloneCanvas(tile);
 	var new_context = new_tile.getContext('2d');
 	new_context.save();
 	new_context.globalCompositeOperation = "source-atop";
-	new_context.fillStyle = "rgba(0,0,0, " + alpha + ")";
+	new_context.fillStyle = "rgba(0, 0, 0, " + alpha + ")";
 	new_context.fillRect(0, 0, new_tile.width, new_tile.height);
 	new_context.restore();
 	return new_tile;
