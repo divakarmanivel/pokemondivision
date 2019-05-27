@@ -20,7 +20,7 @@ Completed Tasks:
 
 # Gameplay
 
-![Gameplay gif](/images/gameplay-2019-05-27_22-28-02.gif.gif "Gameplay gif")
+![Gameplay gif](/images/gameplay-2019-05-27_22-28-02.gif "Gameplay gif")
 
 ## Controls in Game
 
