@@ -6,8 +6,8 @@ Pokémon Division is an online MMORPG based on the famous Pokémon gameboy games
 This game is a work in progress with lots of improvements to be done.
 
 In Progress Tasks:
-* Adding more pokemon to the roster - *In Progress*
-* Make interactable npcs - *In Progress*
+* Create in-house characters - *In Progress*
+* Add more pokemon to the roster - *In Progress*
 * Add a rich map generator to the game for extensive gameplay - *In Progress*
 * Add a storyline to kickstart the game - *In Progress*
 * Add a Pokédex with updated Pokémon data - *In Progress*
@@ -16,10 +16,11 @@ Completed Tasks:
 * Add a minimap - *Completed*
 * Add proper sprites for the character and surroundings - *Completed*
 * Adding npcs - *Completed*
+* Make interactable npcs - *Completed*
 
 # Gameplay
 
-![Gamplay gif](/images/gameplay.gif "Gameplay gif")
+![Gameplay gif](/images/gameplay-2019-05-27_22-28-02.gif.gif "Gameplay gif")
 
 ## Controls in Game
 
