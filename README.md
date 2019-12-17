@@ -5,20 +5,24 @@
 Pokémon Division is an online MMORPG based on the famous Pokémon gameboy games. It is designed to run on all devices.
 This game is a work in progress with lots of improvements to be done.
 
-In Progress Tasks:
-* Create in-house characters - *In Progress*
-* Add more pokemon to the roster - *In Progress*
-* Add a rich map generator to the game for extensive gameplay - *In Progress*
-* Add a storyline to kickstart the game - *In Progress*
-* Add a Pokédex with updated Pokémon data - *In Progress*
+## Tasks
 
-Completed Tasks:
-* Add a minimap - *Completed*
-* Add proper sprites for the character and surroundings - *Completed*
-* Adding npcs - *Completed*
-* Make interactable npcs - *Completed*
+- [ ] Modularize components to ES6
+- [ ] Add a Pokédex with updated Pokémon data
+- [ ] Add menu system
+- [ ] Add battle system
+- [ ] Enhanced lightroom effect
+- [ ] Create in-house characters
+- [ ] Add more pokemon to the roster
+- [ ] Add a rich map generator to the game for extensive gameplay
+- [ ] Add a storyline to kickstart the game
+- [x] Add a minimap
+- [x] Add proper sprites for the character and surroundings
+- [x] Adding npcs
+- [x] Make interactable npcs
+- [x] Add lightroom effect
 
-# Gameplay
+## Gameplay
 
 ![Gameplay gif](/images/gameplay-2019-05-27_22-28-02.gif "Gameplay gif")
 
@@ -49,7 +53,7 @@ One of the key areas where I need help is with sprites! Please take a look at ex
 
 Visit our [Code of Conduct](CODE_OF_CONDUCT.md) page for an overview on our ground rules.
 
-# FAQ
+## FAQ
 
 Q: Why Html and JavaScript when there are a ton of other languages to choose from?
 
@@ -71,9 +75,9 @@ Q: Where did you get the Pokémon art?
 
 A: The art used in this development version was obtained from [The Spriters Resource](https://www.spriters-resource.com/), [Kenney](https://www.kenney.nl) and [OpenGameArt](https://opengameart.org/). I am planning to bring in my own sprites in the near future when I have more time.
 
-# License
+## License
 
 Pokémon, Gotta Catch'em All, and Game Boy are all trademarks of Nintendo.
-This game is not affiliated with Nintendo, Creatures, or GameFreak. 
+This game is not affiliated with Nintendo, Creatures, or GameFreak.
 
 Created and Maintained by Divakar Manivel. Licensed under [GNU General Public License v3.0](LICENSE).

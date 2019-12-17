@@ -7,7 +7,17 @@ var loadingNPC = true;
 var loadingPokemon = true;
 var loadingOutdoor = true;
 var loadingEmotions = true;
+var showMenu = false;
 var showMap = true;
+var showInteraction = false;
+var interactionTitle = "";
+var interactionText = "";
+var bg_color = "#383838";
+var bg_dark_color = "#383838";
+var fg_color = "#fff";
+var shadow_color = "rgba(34, 34, 34, 0.1)";
+var shadow_blur = 4;
+var shadow_offset = 6;
 
 // global variables to calculate movement
 var difX = 0;
@@ -15,10 +25,10 @@ var difY = 0;
 var sX = 0;
 var sY = 0;
 var movement = false;
-var btn_a;
-var btn_b;
-var btn_start;
-var btn_select;
+var btn_a = 0;
+var btn_b = 0;
+var btn_start = 0;
+var btn_select = 0;
 
 //////////////////
 /* Level Setup */
@@ -56,6 +66,8 @@ var mapcanvas = document.getElementById("mapcanvas"); // the map canvas where jo
 var mapcontext = mapcanvas.getContext("2d"); // map canvas context
 var menucanvas = document.getElementById("menucanvas"); // the menu canvas where menu will be drawn
 var menucontext = canvas.getContext("2d"); // menu canvas context
+var interactioncanvas = document.getElementById("interactioncanvas"); // the interaction canvas where interactions will be drawn
+var interactioncontext = canvas.getContext("2d"); // menu canvas context
 
 var screenWidth = window.innerWidth || screen.width; // screen width
 var screenHeight = window.innerHeight || screen.height; // screen height
@@ -67,13 +79,16 @@ touchcanvas.width = screenWidth; // touchcanvas width
 touchcanvas.height = screenHeight; // touchcanvas height
 mapcanvas.width = (screenWidth > 767) ? 300 : 150; // mapcanvas width
 mapcanvas.height = (screenWidth > 767) ? 200 : 100; // mapcanvas height
-menucanvas.width = (screenWidth > 767) ? screenWidth / 3 : screenWidth / 1.5; // menucanvas width
+menucanvas.width = (screenWidth > 767) ? screenWidth / 4 : screenWidth / 1.5; // menucanvas width
 menucanvas.height = screenHeight; // menucanvas height
+interactioncanvas.width = screenWidth; // interactioncanvas width
+interactioncanvas.height = screenHeight; // interactioncanvas height
 
 disableScrolling("bgcanvas");
 disableScrolling("canvas");
 disableScrolling("touchcanvas");
 disableScrolling("mapcanvas");
+disableScrolling("interactioncanvas");
 
 ///////////////////
 /* Camera Setup */

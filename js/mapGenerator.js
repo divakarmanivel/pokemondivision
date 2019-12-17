@@ -284,10 +284,14 @@ function updatePokemonMapData() {
 }
 
 setInterval(function () {
-	updateNPCMapData();
+	if (!loading && btn_start === 0 && !showInteraction) {
+		updateNPCMapData();
+	}
 }, 1000);
 
 
 setInterval(function () {
-	updatePokemonMapData();
+	if (!loading && btn_start === 0 && !showInteraction) {
+		updatePokemonMapData();
+	}
 }, 1000);

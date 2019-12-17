@@ -40,7 +40,6 @@ body {
     z-index: 2;
     bottom: 2%;
     left: 2%;
-    border: 2px solid;
 }
 
 #menucanvas {
@@ -50,9 +49,17 @@ body {
     left: 0;
 }
 
-#touchcanvas {
+#interactioncanvas {
     position: absolute;
     z-index: 4;
+    top: 0;
+    left: 0;
+}
+
+
+#touchcanvas {
+    position: absolute;
+    z-index: 5;
     top: 0;
     left: 0;
 }

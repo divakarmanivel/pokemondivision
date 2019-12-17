@@ -64,10 +64,8 @@ function multiTouch() {
 				console.log("start");
 				if (btn_start == 0) {
 					btn_start = 1;
-					showMap = false;
-				} else {
+				} else if (btn_start == 1) {
 					btn_start = 0;
-					showMap = true;
 				}
 				break;
 		}
@@ -321,10 +319,8 @@ function multiTouch() {
 			console.log("start");
 			if (btn_start == 0) {
 				btn_start = 1;
-				showMap = false;
-			} else {
+			} else if (btn_start == 1) {
 				btn_start = 0;
-				showMap = true;
 			}
 		} else if (startTouchX >= touchcanvas.width - controls_select.width - 10 &&
 			startTouchX <= (touchcanvas.width - controls_select.width - 10 + controls_select.width) &&
@@ -343,6 +339,5 @@ function multiTouch() {
 function reset_inputs() {
 	btn_a = 0;
 	btn_b = 0;
-	btn_start = 0;
 	btn_select = 0;
 }
