@@ -198,7 +198,7 @@ function renderer() {
 		// draw interactions based on character position
 		if (btn_a == 1) {
 			// if menu is closed show interaction
-			if(btn_start == 0 && showInteraction) {
+			if(btn_start == 0 && !showInteraction) {
 				interactionTitle = "";
 				interactionText = "";
 				var interactiveRow = playerRow;
